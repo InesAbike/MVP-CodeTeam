@@ -1,6 +1,6 @@
 import React from 'react'
 import HeroSection from './hero-section/page'
-import HeritageSection from './bannière/page'
+import HeritageSection from './banniere/page'
 
 const LandingPage = () => {
   return (
