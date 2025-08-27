@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function HeritageSection() {
+const HeritageSection=() => {
   return (
     <div className="py-10">
     <div className="relative w-full h-screen flex items-center justify-center ">
@@ -26,3 +26,4 @@ export default function HeritageSection() {
     </div>
   );
 }
+export default HeritageSection 
