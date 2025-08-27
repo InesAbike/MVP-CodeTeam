@@ -19,7 +19,7 @@ export default function HeritageSection() {
           Découvrez l’histoire et l’héritage du Bénin
         </h2>
         <p className="mt-4 text-xl text-gray-100 max-w-2xl drop-shadow-md">
-          Autour de chaque monument, vivez aussi l’art et la créativité de nos artisans locaux.
+          Autour de chaque monument,  vivez aussi l’art et la créativité de nos artisans locaux.
         </p>
       </div>
     </div>
