@@ -1,10 +1,14 @@
-import Image from "next/image";
-import LandingPage from "./pages/landing-page/page";
+import React from 'react'
+import HeroSection from '@/app/components/landing-page/HeroSection'
+import DecouverteSection from '@/app/components/landing-page/DecouverteSection'
 
-export default function Home() {
+const LandingPage = () => {
   return (
-    <div className="">
-      <LandingPage />
+    <div>
+        <HeroSection />
+        <DecouverteSection />
     </div>
-  );
+  )
 }
+
+export default LandingPage
