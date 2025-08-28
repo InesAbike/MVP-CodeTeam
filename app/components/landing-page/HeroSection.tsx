@@ -14,10 +14,10 @@ const HeroBenin = () => {
 
     const [activeFilters, setActiveFilters] = useState(['Cotonou', 'Ouidah', 'Ganvié']);
 
-    const handleFilterToggle = (filter) => {
+    const handleFilterToggle = (filter: string) => {
         setActiveFilters(prev =>
             prev.includes(filter)
-                ? prev.filter(f => f !== filter)
+                ? prev.filter((f: string) => f !== filter)
                 : [...prev, filter]
         );
     };
