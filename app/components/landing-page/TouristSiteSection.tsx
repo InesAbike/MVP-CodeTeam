@@ -44,7 +44,6 @@ const TouristSiteSection = () => {
 
   const touristSites = [
     {
-      id:"1",
       title: "Porte du Non Retour",
       description:
         "Un mémorial imposant commémorant la traite négrière transatlantique, situé sur la magnifique côte de Ouidah.",
@@ -52,8 +51,6 @@ const TouristSiteSection = () => {
       imageAlt: "Porte du Non Retour à Ouidah",
     },
     {
-      id:"2",
-
       title: "Palais Royal d'Abomey",
       description:
         "Découvrez l'histoire fascinante du royaume du Dahomey à travers ses palais royaux classés au patrimoine mondial.",
@@ -61,8 +58,6 @@ const TouristSiteSection = () => {
       imageAlt: "Palais Royal d'Abomey",
     },
     {
-      id:"3",
-
       title: "Village Lacustre de Ganvié",
       description:
         "Explorez la 'Venise de l'Afrique', un village construit sur pilotis au cœur du lac Nokoué, unique en son genre.",
@@ -70,8 +65,6 @@ const TouristSiteSection = () => {
       imageAlt: "Village Lacustre de Ganvié",
     },
     {
-      id:"4",
-
       title: "Village Lacustre de Ganvié",
       description:
         "Explorez la 'Venise de l'Afrique', un village construit sur pilotis au cœur du lac Nokoué, unique en son genre.",
@@ -79,8 +72,6 @@ const TouristSiteSection = () => {
       imageAlt: "Village Lacustre de Ganvié",
     },
     {
-      id:"5",
-
       title: "Village Lacustre de Ganvié",
       description:
         "Explorez la 'Venise de l'Afrique', un village construit sur pilotis au cœur du lac Nokoué, unique en son genre.",
@@ -112,7 +103,6 @@ const TouristSiteSection = () => {
               {touristSites.map((site, index) => (
                 <div key={index} className="embla__slide flex-[0_0_375px]">
                   <TouristSiteCard
-                  id={site.id}
                     title={site.title}
                     description={site.description}
                     imageSrc={site.imageSrc}

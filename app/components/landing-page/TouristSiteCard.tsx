@@ -1,16 +1,14 @@
 import React from "react";
-import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 
 interface TouristSiteCardProps {
-  id: string;
   title: string;
   description: string;
   imageSrc: string;
   imageAlt: string;
 }
 
-const TouristSiteCard = ({ id, title, description, imageSrc, imageAlt }: TouristSiteCardProps) => {
+const TouristSiteCard = ({ title, description, imageSrc, imageAlt }: TouristSiteCardProps) => {
   return (
     <div className="h-[450px] rounded-xl relative overflow-hidden group">
       <img
@@ -26,12 +24,10 @@ const TouristSiteCard = ({ id, title, description, imageSrc, imageAlt }: Tourist
         <p className="text-white text-sm mb-4 line-clamp-2">
           {description}
         </p>
-        <Link href={`/${id}`}>
-          <button className="text-white text-sm flex items-center gap-2 hover:gap-3 transition-all duration-200">
-            Découvrez maintenant
-            <ArrowRightIcon className="w-4 h-4" />
-          </button>
-        </Link>
+        <button className="text-white text-sm flex items-center gap-2 hover:gap-3 transition-all duration-200">
+          Découvrez maintenant
+          <ArrowRightIcon className="w-4 h-4" />
+        </button>
       </div>
     </div>
   );
