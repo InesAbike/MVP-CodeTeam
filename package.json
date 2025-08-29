@@ -13,6 +13,7 @@
     "db:seed": "tsx scripts/seed.ts"
   },
   "dependencies": {
+    "embla-carousel-react": "^8.6.0",
     "convex": "^1.26.2",
     "lucide-react": "^0.541.0",
     "next": "15.5.0",
