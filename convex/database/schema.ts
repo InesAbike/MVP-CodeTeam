@@ -86,6 +86,9 @@ export default defineSchema({
             lat: v.number(),
             lng: v.number(),
             address: v.string(),
+            city: v.string(),
+            department: v.string(),
+            neighborhood: v.string(),
         }),
         categories: v.array(
             v.union(
