@@ -66,7 +66,7 @@ export const getArtisanShops = query({
       shops.map(async (shop) => {
         // For each shop, map the image StorageIDs to full URLs
         const imageUrls = await Promise.all(
-          shop.images.map((imageId) => ctx.storage.getUrl(imageId))
+          shop.images.map((imageId: string) => ctx.storage.getUrl(imageId))
         );
         // Filter out any null URLs
         return { ...shop, images: imageUrls.filter(Boolean) };
@@ -91,7 +91,7 @@ export const getArtisanShopById = query({
 
     // Map the image StorageIDs to full URLs
     const imageUrls = await Promise.all(
-      shop.images.map((imageId) => ctx.storage.getUrl(imageId))
+      shop.images.map((imageId: string) => ctx.storage.getUrl(imageId))
     );
     // Filter out any null URLs
     return { ...shop, images: imageUrls.filter(Boolean) };
