@@ -56,24 +56,45 @@ export const createArtisanShop = mutation({
 });
 
 /**
- * Get all artisan shops.
- * @returns {Promise<object[]>} A list of all artisan shops.
+ * Get all artisan shops with their image URLs.
+ * @returns {Promise<object[]>} A list of all artisan shops with resolved image URLs.
  */
 export const getArtisanShops = query({
   handler: async (ctx) => {
-    return await ctx.db.query("artisanShops").collect();
+    const shops = await ctx.db.query("artisanShops").collect();
+    return Promise.all(
+      shops.map(async (shop) => {
+        // For each shop, map the image StorageIDs to full URLs
+        const imageUrls = await Promise.all(
+          shop.images.map((imageId) => ctx.storage.getUrl(imageId))
+        );
+        // Filter out any null URLs
+        return { ...shop, images: imageUrls.filter(Boolean) };
+      })
+    );
   },
 });
 
 /**
- * Get a single artisan shop by its ID.
+ * Get a single artisan shop by its ID with its image URLs.
  * @param {string} id - The ID of the shop to retrieve.
- * @returns {Promise<object|null>} The shop object or null if not found.
+ * @returns {Promise<object|null>} The shop object with resolved image URLs, or null if not found.
  */
 export const getArtisanShopById = query({
   args: { id: v.id("artisanShops") },
   handler: async (ctx, args) => {
-    return await ctx.db.get(args.id);
+    const shop = await ctx.db.get(args.id);
+
+    if (!shop) {
+      return null;
+    }
+
+    // Map the image StorageIDs to full URLs
+    const imageUrls = await Promise.all(
+      shop.images.map((imageId) => ctx.storage.getUrl(imageId))
+    );
+    // Filter out any null URLs
+    return { ...shop, images: imageUrls.filter(Boolean) };
   },
 });
 
