@@ -23,7 +23,7 @@ const HeroBenin = () => {
     };
 
     return (
-        <div className="relative min-h-screen w-full bg-black/40 overflow-hidden">
+        <div className="relative w-full bg-black/40 overflow-hidden">
 
             <Image
                 src="/images/hero-benin.webp"
@@ -37,7 +37,7 @@ const HeroBenin = () => {
             <NavBar variant="hero" />
 
             {/* Hero Content */}
-            <div className="relative z-10 px-6 lg:px-12 mt-16 lg:mt-20">
+            <div className="relative z-10 px-6 lg:px-12 mt-16 lg:mt-20 py-20">
                 {/* Feature Tags */}
                 <div className="flex flex-wrap gap-3 mb-8">
                     <span className="bg-white/20 text-white px-4 py-2 rounded-lg text-sm backdrop-blur-sm flex items-center">
