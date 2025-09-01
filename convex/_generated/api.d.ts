@@ -23,6 +23,8 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as api_artisanShops from "../api/artisanShops.js";
+import type * as api_seedData from "../api/seedData.js";
+import type * as api_touristicSites from "../api/touristicSites.js";
 import type * as api_upload from "../api/upload.js";
 
 /**
