@@ -1,5 +1,6 @@
 import { query, mutation } from "../_generated/server";
 import { v } from "convex/values";
+import { geospatial } from "../geospatial";
 
 /**
  * Create a new artisan shop.
@@ -51,6 +52,14 @@ export const createArtisanShop = mutation({
   },
   handler: async (ctx, args) => {
     const shopId = await ctx.db.insert("artisanShops", args);
+    // Insérer dans l'index géospatial pour les recherches de proximité
+    await geospatial.insert(
+      ctx,
+      shopId, // Utiliser l'ID de la boutique comme clé
+      { latitude: args.location.lat, longitude: args.location.lng },
+      { categories: args.categories }, // Filtres optionnels
+      args.location.lat // Tri par latitude (peut être ajusté)
+    );
     return shopId;
   },
 });
@@ -129,5 +138,33 @@ export const deleteArtisanShop = mutation({
   args: { id: v.id("artisanShops") },
   handler: async (ctx, args) => {
     await ctx.db.delete(args.id);
+  },
+});
+
+/**
+ * Trouver les boutiques d'artisans proches d'une position donnée.
+ * Utilise l'index géospatial pour des recherches efficaces par proximité.
+ * @param {number} lat - Latitude du point de référence.
+ * @param {number} lng - Longitude du point de référence.
+ * @param {number} [maxResults] - Nombre maximum de résultats (défaut: 10).
+ * @param {number} [maxDistance] - Distance maximale en mètres (optionnel).
+ * @returns {Promise<Array<{key: string, coordinates: {latitude: number, longitude: number}}>>} Liste des boutiques proches avec leurs coordonnées.
+ */
+export const getNearbyArtisanShops = query({
+  args: {
+    lat: v.number(),
+    lng: v.number(),
+    maxResults: v.optional(v.number()),
+    maxDistance: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const maxResults = args.maxResults || 10;
+    const result = await geospatial.queryNearest(
+      ctx,
+      { latitude: args.lat, longitude: args.lng },
+      maxResults,
+      args.maxDistance
+    );
+    return result;
   },
 });
