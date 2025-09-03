@@ -52,13 +52,13 @@ export const createArtisanShop = mutation({
   },
   handler: async (ctx, args) => {
     const shopId = await ctx.db.insert("artisanShops", args);
-    // Insérer dans l'index géospatial pour les recherches de proximité
+    // Insert the shop in the geospatial index
     await geospatial.insert(
       ctx,
-      shopId, // Utiliser l'ID de la boutique comme clé
+      shopId, // Use the shop ID as the key
       { latitude: args.location.lat, longitude: args.location.lng },
-      { categories: args.categories }, // Filtres optionnels
-      args.location.lat // Tri par latitude (peut être ajusté)
+      { categories: args.categories }, // Optional filters
+      args.location.lat // Sort by latitude (can be adjusted)
     );
     return shopId;
   },
@@ -142,13 +142,13 @@ export const deleteArtisanShop = mutation({
 });
 
 /**
- * Trouver les boutiques d'artisans proches d'une position donnée.
- * Utilise l'index géospatial pour des recherches efficaces par proximité.
- * @param {number} lat - Latitude du point de référence.
- * @param {number} lng - Longitude du point de référence.
- * @param {number} [maxResults] - Nombre maximum de résultats (défaut: 10).
- * @param {number} [maxDistance] - Distance maximale en mètres (optionnel).
- * @returns {Promise<Array<{key: string, coordinates: {latitude: number, longitude: number}}>>} Liste des boutiques proches avec leurs coordonnées.
+ * Find nearby artisan shops.
+ * Uses the geospatial index for efficient proximity searches.
+ * @param {number} lat - Latitude of the reference point.
+ * @param {number} lng - Longitude of the reference point.
+ * @param {number} [maxResults] - Maximum number of results (default: 10).
+ * @param {number} [maxDistance] - Maximum distance in meters (optional).
+ * @returns {Promise<Array<{key: string, coordinates: {latitude: number, longitude: number}}>>} List of nearby artisan shops with their coordinates.
  */
 export const getNearbyArtisanShops = query({
   args: {
