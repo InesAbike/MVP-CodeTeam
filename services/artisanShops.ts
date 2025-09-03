@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
@@ -92,7 +94,7 @@ export const useCreateArtisanShop = () => {
       const newShopId = await createArtisanShopMutation({
         ...data,
         images: storageIds,
-        isVerified: false, // Shops are not verified by default
+        isVerified: true,
       });
 
       setIsLoading(false);
