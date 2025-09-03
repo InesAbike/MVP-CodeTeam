@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import type { ArtisanShop, CreateArtisanShopDTO, UpdateArtisanShopDTO, NearbyArtisanShopsDTO, NearbyArtisanShopResult } from "@/types/artisan.types";
+import type { ArtisanShop, CreateArtisanShopDTO, UpdateArtisanShopDTO} from "@/types/artisan.types";
 import { Id } from "@/convex/_generated/dataModel";
 
 
@@ -206,4 +206,3 @@ export const useDeleteArtisanShop = () => {
 
   return { mutate, isLoading, error };
 };
-
