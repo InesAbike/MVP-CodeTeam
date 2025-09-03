@@ -4,7 +4,8 @@ import DecouverteSection from '@/app/components/landing-page/DecouverteSection'
 import TouristSiteSection from '@/app/components/landing-page/TouristSiteSection'
 import ArtisanalShopSection from '@/app/components/landing-page/ArtisanalShopSection'
 import CulturalEventsSection from '@/app/components/landing-page/CulturalEventsSection'
-const LandingPage = () => {
+import { TestimonialsSection } from './components/landing-page/TestimonialsSection'
+  const LandingPage = () => {
   return (
     <div>
         <HeroSection />
@@ -12,6 +13,7 @@ const LandingPage = () => {
         <DecouverteSection />
         <ArtisanalShopSection />
         <CulturalEventsSection/>
+        <TestimonialsSection/>
     </div>
   )
 }
