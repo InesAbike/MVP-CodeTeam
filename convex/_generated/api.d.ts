@@ -9,6 +9,7 @@
  */
 
 import type * as api_artisanShops from "../api/artisanShops.js";
+import type * as api_index from "../api/index.js";
 import type * as api_search from "../api/search.js";
 import type * as api_seedData from "../api/seedData.js";
 import type * as api_touristicSites from "../api/touristicSites.js";
@@ -32,6 +33,7 @@ import type {
  */
 declare const fullApi: ApiFromModules<{
   "api/artisanShops": typeof api_artisanShops;
+  "api/index": typeof api_index;
   "api/search": typeof api_search;
   "api/seedData": typeof api_seedData;
   "api/touristicSites": typeof api_touristicSites;
