@@ -2,8 +2,8 @@ import { GeospatialIndex } from "@convex-dev/geospatial";
 import { components } from "./_generated/api";
 
 /**
- * Instance du GeospatialIndex pour les requêtes géospatiales.
- * Permet d'insérer et de rechercher des points géographiques efficacement.
+ * Instance of GeospatialIndex for geospatial queries.
+ * Allows efficient insertion and search of geographic points.
  */
 const geospatial = new GeospatialIndex(components.geospatial);
 
