@@ -74,16 +74,16 @@ const testimonials = [
   },
 ];
 
-// Répartition équilibrée des témoignages en 4 colonnes
+// Répartition équilibrée des témoignages en 3 colonnes pour desktop
 const distributeTestimonials = () => {
-  const columns: TestimonialCardProps[][] = [[], [], [], []];
+  const columns: TestimonialCardProps[][] = [[], [], []];
   testimonials.forEach((testimonial: TestimonialCardProps, index: number) => {
-    return columns[index % 4].push(testimonial);
+    return columns[index % 3].push(testimonial);
   });
   return columns;
 };
 
-const [firstRow, secondRow, thirdRow, fourthRow] = distributeTestimonials();
+const [firstRow, secondRow, thirdRow] = distributeTestimonials();
 
 const TestimonialCard = ({
   text,
@@ -92,12 +92,11 @@ const TestimonialCard = ({
   userImage,
 }: TestimonialCardProps) => {
   return (
-    <div className="bg-black/20 w-72 rounded-xl p-4 text-white">
+    <div className="bg-black/20 rounded-xl p-4 text-white max-w-sm">
       <p className="text-sm leading-relaxed mb-4">{text}</p>
-
       <div className="flex items-center">
         {userImage ? (
-          <div className="w-8 h-8 rounded-full overflow-hidden mr-3">
+          <div className="w-8 h-8 rounded-full overflow-hidden mr-3 flex-shrink-0">
             <Image
               src={userImage}
               alt={userName}
@@ -107,12 +106,11 @@ const TestimonialCard = ({
             />
           </div>
         ) : (
-          <div className="w-8 h-8 bg-gray-600 rounded-full mr-3"></div>
+          <div className="w-8 h-8 bg-gray-600 rounded-full mr-3 flex-shrink-0"></div>
         )}
-
-        <div>
-          <div className="text-sm font-medium">{userName}</div>
-          <div className="text-xs text-gray-400">{userHandle}</div>
+        <div className="min-w-0">
+          <div className="text-sm font-medium truncate">{userName}</div>
+          <div className="text-xs text-gray-400 truncate">{userHandle}</div>
         </div>
       </div>
     </div>
@@ -124,77 +122,122 @@ export function TestimonialsSection() {
     <div className="py-16">
       <div className="text-center mb-12">
         <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-          Ce que disent les touristes
+          Témoignages de nos voyageurs
         </h2>
-        <p className="text-gray-500 mt-2">
-          Expériences réelles de visiteurs ayant exploré les trésors culturels
-          de Bénin
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          Découvrez ce que nos utilisateurs disent de leur expérience
         </p>
       </div>
 
-      <div className="relative bg-black/80 flex h-[500px] max-w-7xl mx-auto flex-row items-center justify-center overflow-hidden rounded-2xl p-4">
-        <Marquee pauseOnHover vertical className="[--duration:25s]" repeat={3}>
-          {firstRow.map((testimonial: TestimonialCardProps, index: number) => (
-            <TestimonialCard
-              key={index}
-              text={testimonial.text}
-              userName={testimonial.userName}
-              userHandle={testimonial.userHandle}
-              userImage={testimonial.userImage}
-            />
-          ))}
-        </Marquee>
+      <div className="relative md:hidden bg-black/80 h-[400px] max-w-7xl mx-auto overflow-hidden rounded-2xl">
+        <div className="py-4">
+          <Marquee
+            pauseOnHover
+            className="[--duration:55s] flex items-center h-full"
+            repeat={3}
+          >
+            {testimonials.map(
+              (testimonial: TestimonialCardProps, index: number) => (
+                <div key={index} className="mr-4">
+                  <TestimonialCard
+                    text={testimonial.text}
+                    userName={testimonial.userName}
+                    userHandle={testimonial.userHandle}
+                    userImage={testimonial.userImage}
+                  />
+                </div>
+              )
+            )}
+          </Marquee>
 
-        <Marquee
-          reverse
-          pauseOnHover
-          vertical
-          className="[--duration:30s]"
-          repeat={3}
-        >
-          {secondRow.map((testimonial: TestimonialCardProps, index: number) => (
-            <TestimonialCard
-              key={index}
-              text={testimonial.text}
-              userName={testimonial.userName}
-              userHandle={testimonial.userHandle}
-              userImage={testimonial.userImage}
-            />
-          ))}
-        </Marquee>
+          <Marquee
+            pauseOnHover
+            className="[--duration:60s] flex items-center h-full"
+            repeat={3}
+            reverse
+          >
+            {testimonials.map(
+              (testimonial: TestimonialCardProps, index: number) => (
+                <div key={index} className="mr-4">
+                  <TestimonialCard
+                    text={testimonial.text}
+                    userName={testimonial.userName}
+                    userHandle={testimonial.userHandle}
+                    userImage={testimonial.userImage}
+                  />
+                </div>
+              )
+            )}
+          </Marquee>
+        </div>
 
-        <Marquee pauseOnHover vertical className="[--duration:35s]" repeat={3}>
-          {thirdRow.map((testimonial: TestimonialCardProps, index: number) => (
-            <TestimonialCard
-              key={index}
-              text={testimonial.text}
-              userName={testimonial.userName}
-              userHandle={testimonial.userHandle}
-              userImage={testimonial.userImage}
-            />
-          ))}
-        </Marquee>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l from-black/80 via-black/40 to-transparent z-10"></div>
+      </div>
 
-        <Marquee
-          pauseOnHover
-          reverse
-          vertical
-          className="[--duration:28s]"
-          repeat={3}
-        >
-          {fourthRow.map((testimonial: TestimonialCardProps, index: number) => (
-            <TestimonialCard
-              key={index}
-              text={testimonial.text}
-              userName={testimonial.userName}
-              userHandle={testimonial.userHandle}
-              userImage={testimonial.userImage}
-            />
-          ))}
-        </Marquee>
-
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/6 bg-gradient-to-t from-transparent to-black"></div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-b from-transparent to-black"></div>
+      <div className="relative hidden md:flex bg-black/80 h-[450px] max-w-7xl mx-auto items-center justify-center overflow-hidden rounded-2xl">
+        <div className="flex w-full h-full px-4">
+          <Marquee
+            pauseOnHover
+            vertical
+            className="[--duration:25s] flex-1"
+            repeat={3}
+          >
+            {firstRow.map(
+              (testimonial: TestimonialCardProps, index: number) => (
+                <div key={index} className="mb-4">
+                  <TestimonialCard
+                    text={testimonial.text}
+                    userName={testimonial.userName}
+                    userHandle={testimonial.userHandle}
+                    userImage={testimonial.userImage}
+                  />
+                </div>
+              )
+            )}
+          </Marquee>
+          <Marquee
+            reverse
+            pauseOnHover
+            vertical
+            className="[--duration:30s] flex-1"
+            repeat={3}
+          >
+            {secondRow.map(
+              (testimonial: TestimonialCardProps, index: number) => (
+                <div key={index} className="mb-4">
+                  <TestimonialCard
+                    text={testimonial.text}
+                    userName={testimonial.userName}
+                    userHandle={testimonial.userHandle}
+                    userImage={testimonial.userImage}
+                  />
+                </div>
+              )
+            )}
+          </Marquee>
+          <Marquee
+            pauseOnHover
+            vertical
+            className="[--duration:35s] flex-1"
+            repeat={3}
+          >
+            {thirdRow.map(
+              (testimonial: TestimonialCardProps, index: number) => (
+                <div key={index} className="mb-4">
+                  <TestimonialCard
+                    text={testimonial.text}
+                    userName={testimonial.userName}
+                    userHandle={testimonial.userHandle}
+                    userImage={testimonial.userImage}
+                  />
+                </div>
+              )
+            )}
+          </Marquee>
+        </div>
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/6 bg-gradient-to-b from-black/80 via-black/60 to-transparent z-10"></div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-black/80 via-black/60 to-transparent z-10"></div>
       </div>
     </div>
   );
