@@ -9,10 +9,12 @@
  */
 
 import type * as api_artisanShops from "../api/artisanShops.js";
+import type * as api_search from "../api/search.js";
 import type * as api_seedData from "../api/seedData.js";
 import type * as api_touristicSites from "../api/touristicSites.js";
 import type * as api_upload from "../api/upload.js";
 import type * as geospatial from "../geospatial.js";
+import type * as utils_stringUtils from "../utils/stringUtils.js";
 
 import type {
   ApiFromModules,
@@ -30,10 +32,12 @@ import type {
  */
 declare const fullApi: ApiFromModules<{
   "api/artisanShops": typeof api_artisanShops;
+  "api/search": typeof api_search;
   "api/seedData": typeof api_seedData;
   "api/touristicSites": typeof api_touristicSites;
   "api/upload": typeof api_upload;
   geospatial: typeof geospatial;
+  "utils/stringUtils": typeof utils_stringUtils;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 

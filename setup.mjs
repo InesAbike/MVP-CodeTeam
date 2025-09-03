@@ -20,11 +20,11 @@ async function main() {
 
   try {
     console.log("📍 Seeding touristic sites...");
-    await client.mutation(api.seedData.seedTouristicSites);
+    await client.mutation(api.api.seedData.seedTouristicSites);
     console.log("✅ Touristic sites seeded successfully");
 
     console.log("🏪 Seeding artisan shops...");
-    await client.mutation(api.seedData.seedArtisanShops);
+    await client.mutation(api.api.seedData.seedArtisanShops);
     console.log("✅ Artisan shops seeded successfully");
 
     console.log("✨ Database seeding completed successfully!");
