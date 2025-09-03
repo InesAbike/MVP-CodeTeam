@@ -5,6 +5,7 @@ import TouristSiteSection from '@/app/components/landing-page/TouristSiteSection
 import ArtisanalShopSection from '@/app/components/landing-page/ArtisanalShopSection'
 import CulturalEventsSection from '@/app/components/landing-page/CulturalEventsSection'
 import { TestimonialsSection } from './components/landing-page/TestimonialsSection'
+import CTASection from './components/landing-page/CTASection'
   const LandingPage = () => {
   return (
     <div>
@@ -14,6 +15,7 @@ import { TestimonialsSection } from './components/landing-page/TestimonialsSecti
         <ArtisanalShopSection />
         <CulturalEventsSection/>
         <TestimonialsSection/>
+        <CTASection/>
     </div>
   )
 }
