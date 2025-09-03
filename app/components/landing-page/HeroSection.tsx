@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { Search, Phone, MessageCircle, Play, MapPin, DollarSign, ArrowRight } from 'lucide-react';
+import { Search, Play, MapPin, DollarSign } from 'lucide-react';
 import Image from 'next/image';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
 
