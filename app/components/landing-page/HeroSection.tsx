@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Search, Play, MapPin, DollarSign } from 'lucide-react';
 import Image from 'next/image';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
-import SearchComponent from '../SearchComponent';
 
 const HeroBenin = () => {
     const [searchData, setSearchData] = useState({
@@ -241,7 +240,6 @@ const HeroBenin = () => {
                     </div>
                 </div>
             </div>
-            <SearchComponent />
         </div>
     );
 };
