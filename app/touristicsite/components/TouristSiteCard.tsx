@@ -1,7 +1,9 @@
-"use client"
+"use client";
 import React from "react";
 import { Clock, MapPin, Star } from "lucide-react";
 import Image from "next/image";
+import { FiInfo } from "react-icons/fi";
+import { FaRegHeart } from "react-icons/fa";
 
 interface TouristSiteCardProps {
   id: string;
@@ -41,10 +43,16 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
   return (
     <div className="bg-[#FFFBEB]">
       <div className="relative">
-        <Image src={image} alt={title} className="h-full w-full object-cover max-h-[500px]" width={1200} height={500}/>
+        <Image
+          src={image}
+          alt={title}
+          className="h-full w-full object-cover max-h-[500px]"
+          width={1200}
+          height={500}
+        />
       </div>
 
-      <div className="bg-white shadow-md rounded-xl p-4 w-full max-w-3xl mx-auto -mt-20 relative z-10">
+      <div className="bg-white shadow-md rounded-xl p-5 w-full max-w-3xl mx-auto -mt-20 relative z-10">
         <div className="flex justify-between items-start">
           <span
             className={`px-2 py-1 text-xs font-medium rounded-md ${colorClass}`}
@@ -58,34 +66,51 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
         </div>
 
         {/* Titre + Lieu + Horaire */}
-        <h2 className="text-xl font-bold mt-2">{title}</h2>
-        <div className="flex items-center text-sm text-gray-500 gap-2">
-          <MapPin className="w-4 h-4" />
-          <span>{location}</span>
-          <Clock className="w-4 h-4 ml-4" />
-          <span>{openingHours}</span>
+        <h2 className="text-xl lg:text-2xl font-bold mt-2 mb-4 text-[#78350F]">
+          {title}
+        </h2>
+        <div className="grid grid-cols-2 text-sm text-gray-500 gap-2">
+          <div className="flex items-center gap-2">
+            <MapPin className="w-4 h-4" />
+            <span>{location}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Clock className="w-4 h-4 ml-4" />
+            <span>{openingHours}</span>
+          </div>
+        </div>
+        <hr className="my-4 border-t-1 border-gray-200" />
+        {/* Description */}
+        <div className="mt-5">
+          <h3 className="font-semibold mb-2 text-[#78350F]">À propos</h3>
+          <p className="text-gray-600 text-sm mb-2">{description}</p>
         </div>
 
-        {/* Description */}
-        <div className="mt-3">
-          <h3 className="font-semibold mb-1">À propos</h3>
-          <p className="text-gray-600 text-sm">{description}</p>
-        </div>
+        <hr className="my-4 border-t-1 border-gray-200" />
 
         {/* Infos pratiques */}
-        <div className="mt-4 bg-yellow-50 p-3 rounded-lg text-sm space-y-1">
-          <p>
-            <span className="font-semibold">Tarif d’entrée :</span> {price}
-          </p>
-          <p>
-            <span className="font-semibold">Accessibilité :</span>{" "}
-            {accessibility}
-          </p>
+        <div className="">
+          <h3 className="font-semibold mb-2 text-[#78350F] text-lg">
+            Infos pratiques
+          </h3>
+          <div className="mt-1 bg-[#FFFBEB] p-3 rounded-lg text-sm space-y-1 text-gray-600 flex gap-3">
+            <FiInfo className="size-5 text-[#D97706]" />
+            <div className="flex flex-col gap-2">
+              <p>
+                <span className="font-semibold">Tarif d’entrée :</span> {price}
+              </p>
+              <p>
+                <span className="font-semibold">Accessibilité :</span>{" "}
+                {accessibility}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Bouton */}
-        <button className="w-full mt-4 py-2 bg-[#D97706] text-white font-medium rounded-lg hover:bg-orange-600 transition">
-          Ajouter à l’itinéraire
+        <button className="w-full mt-5 py-2 bg-[#D97706] text-white text-center font-medium rounded-lg hover:bg-orange-600 transition flex justify-center items-center gap-2">
+          <FaRegHeart className="size-6 text-white" />
+          <span className="font-semibold text-lg">Ajouter à l’itinéraire</span>
         </button>
       </div>
     </div>

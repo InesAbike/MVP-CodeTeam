@@ -20,7 +20,7 @@ export default function DetailPage() {
       openingHours: "8h - 18h",
       price: "1000 FCFA",
       accessibility: "Accessible en voiture, guide disponible",
-      image: "/images/mount.jpg",
+      image: "/images/hero-benin.png",
       artisans: [
         {
           id: 1,
@@ -74,7 +74,7 @@ export default function DetailPage() {
       <TouristSiteCard {...site} />
 
       {/* Composant Artisans */}
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto mb-5">
         <h3 className=" text-base md:text-lg font-semibold mb-4 flex items-center gap-2 text-[#78350F]">
           <Image src="/icones/store.svg" alt="store" width={24} height={24} className="w-6 h-6" />
           Artisanat à proximité
