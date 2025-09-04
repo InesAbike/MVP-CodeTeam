@@ -47,6 +47,7 @@ const TouristSiteSection = () => {
   const sitesData = useGetTouristicSites();
 
   const touristSites = sitesData?.map((site) => ({
+    id: site._id,
     title: site.name,
     description: site.description,
     imageSrc: site.images[0] || "/images/tourist-site-img/porte-non-retour.jpg",
@@ -85,6 +86,7 @@ const TouristSiteSection = () => {
                 touristSites.map((site, index) => (
                   <div key={index} className="embla__slide flex-[0_0_375px]">
                     <TouristSiteCard
+                      id={site.id}
                       title={site.title}
                       description={site.description}
                       imageSrc={site.imageSrc}

@@ -1,12 +1,14 @@
-"use client"
-import ArtisanCard from "../components/ArtisanCard";
-import TouristSiteCard from "../components/TouristSiteCard";
-import Image from "next/image";
-import { useParams } from "next/navigation";
+import TouristSiteCard from "@/components/TouristSiteCard";
+import ArtisanCard from "@/components/ArtisanCard";
 
+interface DetailPageProps {
+  params: {
+    id: string;
+  };
+}
 
-export default function DetailPage() {
-  const { id } = useParams();
+export default function DetailPage({ params }: DetailPageProps) {
+  const { id } = params;
 
   const sites = [
     {
@@ -20,21 +22,21 @@ export default function DetailPage() {
       openingHours: "8h - 18h",
       price: "1000 FCFA",
       accessibility: "Accessible en voiture, guide disponible",
-      image: "/images/hero-benin.png",
+      image: "/images/palais-abomey.jpg",
       artisans: [
         {
           id: 1,
           name: "Adjovi K.",
           location: "Abomey",
           categories: ["Tissage", "Broderie"],
-          image: "/images/hero-benin.jpg",
+          image: "/images/artisan1.jpg",
         },
         {
           id: 2,
           name: "Houngan A.",
           location: "Abomey",
           categories: ["Sculpture", "Bronze"],
-          image: "/images/hero-benin.png",
+          image: "/images/artisan2.jpg",
         },
       ],
     },
@@ -49,14 +51,14 @@ export default function DetailPage() {
       openingHours: "7h - 17h",
       price: "1500 FCFA",
       accessibility: "Accès uniquement en bateau",
-      image: "/images/zone-indu.jpg",
+      image: "/images/ganvie.jpg",
       artisans: [
         {
           id: 3,
           name: "Dossou F.",
           location: "Ganvié",
           categories: ["Poterie", "Peinture"],
-          image: "/images/hero-benin.png",
+          image: "/images/artisan3.jpg",
         },
       ],
     },
@@ -75,8 +77,7 @@ export default function DetailPage() {
 
       {/* Composant Artisans */}
       <div className="max-w-3xl mx-auto mb-5">
-        <h3 className=" text-base md:text-lg font-semibold mb-4 flex items-center gap-2 text-[#78350F]">
-          <Image src="/icones/store.svg" alt="store" width={24} height={24} className="w-6 h-6" />
+        <h3 className="text-base md:text-lg font-semibold mb-4 flex items-center gap-2 text-[#78350F]">
           Artisanat à proximité
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

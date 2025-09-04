@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { Clock, MapPin, Star } from "lucide-react";
 import Image from "next/image";
@@ -41,7 +40,7 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
     colors[category.toLowerCase()] || "bg-gray-100 text-gray-600";
 
   return (
-    <div className="bg-[#FFFBEB]">
+    <div className="bg-[#FFFBEB] min-h-screen">
       <div className="relative">
         <Image
           src={image}
@@ -80,6 +79,7 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
           </div>
         </div>
         <hr className="my-4 border-t-1 border-gray-200" />
+
         {/* Description */}
         <div className="mt-5">
           <h3 className="font-semibold mb-2 text-[#78350F]">À propos</h3>
@@ -97,7 +97,7 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
             <FiInfo className="size-5 text-[#D97706]" />
             <div className="flex flex-col gap-2">
               <p>
-                <span className="font-semibold">Tarif d’entrée :</span> {price}
+                <span className="font-semibold">Tarif d'entrée :</span> {price}
               </p>
               <p>
                 <span className="font-semibold">Accessibilité :</span>{" "}
@@ -110,7 +110,7 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
         {/* Bouton */}
         <button className="w-full mt-5 py-2 bg-[#D97706] text-white text-center font-medium rounded-lg hover:bg-orange-600 transition flex justify-center items-center gap-2">
           <FaRegHeart className="size-6 text-white" />
-          <span className="font-semibold text-lg">Ajouter à l’itinéraire</span>
+          <span className="font-semibold text-lg">Ajouter à l'itinéraire</span>
         </button>
       </div>
     </div>
