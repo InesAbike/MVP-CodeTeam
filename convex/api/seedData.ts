@@ -1,4 +1,5 @@
 import { mutation } from "../_generated/server";
+import { geospatial } from "../geospatial";
 
 /**
  * Seed the database with initial touristic sites data
@@ -495,7 +496,15 @@ export const seedArtisanShops = mutation({
     ];
 
     for (const shop of shops) {
-      await ctx.db.insert("artisanShops", shop);
+      const shopId = await ctx.db.insert("artisanShops", shop);
+      // Insérer dans l'index géospatial
+      await geospatial.insert(
+        ctx,
+        shopId,
+        { latitude: shop.location.lat, longitude: shop.location.lng },
+        { categories: shop.categories },
+        shop.location.lat
+      );
     }
 
     return "Artisan shops seeded successfully";

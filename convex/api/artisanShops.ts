@@ -1,5 +1,6 @@
 import { query, mutation } from "../_generated/server";
 import { v } from "convex/values";
+import { geospatial } from "../geospatial";
 
 /**
  * Create a new artisan shop.
@@ -51,6 +52,14 @@ export const createArtisanShop = mutation({
   },
   handler: async (ctx, args) => {
     const shopId = await ctx.db.insert("artisanShops", args);
+    // Insert the shop in the geospatial index
+    await geospatial.insert(
+      ctx,
+      shopId, // Use the shop ID as the key
+      { latitude: args.location.lat, longitude: args.location.lng },
+      { categories: args.categories }, // Optional filters
+      args.location.lat // Sort by latitude (can be adjusted)
+    );
     return shopId;
   },
 });
@@ -129,5 +138,33 @@ export const deleteArtisanShop = mutation({
   args: { id: v.id("artisanShops") },
   handler: async (ctx, args) => {
     await ctx.db.delete(args.id);
+  },
+});
+
+/**
+ * Find nearby artisan shops.
+ * Uses the geospatial index for efficient proximity searches.
+ * @param {number} lat - Latitude of the reference point.
+ * @param {number} lng - Longitude of the reference point.
+ * @param {number} [maxResults] - Maximum number of results (default: 10).
+ * @param {number} [maxDistance] - Maximum distance in meters (optional).
+ * @returns {Promise<Array<{key: string, coordinates: {latitude: number, longitude: number}}>>} List of nearby artisan shops with their coordinates.
+ */
+export const getNearbyArtisanShops = query({
+  args: {
+    lat: v.number(),
+    lng: v.number(),
+    maxResults: v.optional(v.number()),
+    maxDistance: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const maxResults = args.maxResults || 10;
+    const result = await geospatial.queryNearest(
+      ctx,
+      { latitude: args.lat, longitude: args.lng },
+      maxResults,
+      args.maxDistance
+    );
+    return result;
   },
 });
