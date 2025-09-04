@@ -1,14 +1,12 @@
-import TouristSiteCard from "@/components/TouristSiteCard";
-import ArtisanCard from "@/components/ArtisanCard";
+"use client"
+import ArtisanCard from "../components/ArtisanCard";
+import TouristSiteCard from "../components/TouristSiteCard";
+import Image from "next/image";
+import { useParams } from "next/navigation";
 
-interface DetailPageProps {
-  params: {
-    id: string;
-  };
-}
 
-export default function DetailPage({ params }: DetailPageProps) {
-  params: { id: string };
+export default function DetailPage() {
+  const { id } = useParams();
 
   const sites = [
     {
@@ -22,21 +20,21 @@ export default function DetailPage({ params }: DetailPageProps) {
       openingHours: "8h - 18h",
       price: "1000 FCFA",
       accessibility: "Accessible en voiture, guide disponible",
-      image: "/images/palais-abomey.jpg",
+      image: "/images/mount.jpg",
       artisans: [
         {
           id: 1,
           name: "Adjovi K.",
           location: "Abomey",
           categories: ["Tissage", "Broderie"],
-          image: "/images/artisan1.jpg",
+          image: "/images/hero-benin.jpg",
         },
         {
           id: 2,
           name: "Houngan A.",
           location: "Abomey",
           categories: ["Sculpture", "Bronze"],
-          image: "/images/artisan2.jpg",
+          image: "/images/hero-benin.png",
         },
       ],
     },
@@ -51,14 +49,14 @@ export default function DetailPage({ params }: DetailPageProps) {
       openingHours: "7h - 17h",
       price: "1500 FCFA",
       accessibility: "Accès uniquement en bateau",
-      image: "/images/ganvie.jpg",
+      image: "/images/zone-indu.jpg",
       artisans: [
         {
           id: 3,
           name: "Dossou F.",
           location: "Ganvié",
           categories: ["Poterie", "Peinture"],
-          image: "/images/artisan3.jpg",
+          image: "/images/hero-benin.png",
         },
       ],
     },
@@ -71,14 +69,17 @@ export default function DetailPage({ params }: DetailPageProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-[#FFFBEB] min-h-screen">
       {/* Composant Site */}
       <TouristSiteCard {...site} />
 
       {/* Composant Artisans */}
-      <div className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Artisans liés au site</h3>
-        <div className="flex flex-wrap gap-4">
+      <div className="max-w-3xl mx-auto">
+        <h3 className=" text-base md:text-lg font-semibold mb-4 flex items-center gap-2 text-[#78350F]">
+          <Image src="/icones/store.svg" alt="store" width={24} height={24} className="w-6 h-6" />
+          Artisanat à proximité
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {site.artisans.map((artisan) => (
             <ArtisanCard key={artisan.id} {...artisan} />
           ))}

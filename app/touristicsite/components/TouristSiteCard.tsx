@@ -1,5 +1,7 @@
+"use client"
 import React from "react";
 import { Clock, MapPin, Star } from "lucide-react";
+import Image from "next/image";
 
 interface TouristSiteCardProps {
   id: string;
@@ -37,12 +39,12 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
     colors[category.toLowerCase()] || "bg-gray-100 text-gray-600";
 
   return (
-    <div className="bg-[#FFFBEB] min-h-screen">
+    <div className="bg-[#FFFBEB]">
       <div className="relative">
-        <img src={image} alt={title} className="h-full w-full object-cover" />
+        <Image src={image} alt={title} className="h-full w-full object-cover max-h-[500px]" width={1200} height={500}/>
       </div>
 
-      <div className="bg-white shadow-md rounded-xl p-4 w-full max-w-2xl mx-auto -mt-20 relative z-10">
+      <div className="bg-white shadow-md rounded-xl p-4 w-full max-w-3xl mx-auto -mt-20 relative z-10">
         <div className="flex justify-between items-start">
           <span
             className={`px-2 py-1 text-xs font-medium rounded-md ${colorClass}`}
