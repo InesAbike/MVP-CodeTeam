@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Footer } from "./components/landing-page/Footer";
+import { Footer } from "./components/layouts/Footer";
 import { ConvexClientProvider } from "../providers/ConvexClientProvider";
 
 const geistSans = Geist({
