@@ -1,5 +1,5 @@
 import React, { ComponentPropsWithRef } from "react";
-import { cn } from "@/app/libs/utils";
+import { cn } from "@/app/lib/utils";
 
 interface MarqueeProps extends ComponentPropsWithRef<"div"> {
   className?: string;
