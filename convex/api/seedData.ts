@@ -21,7 +21,7 @@ export const seedTouristicSites = mutation({
           neighborhood: "Djègbadji",
         },
         category: "historique",
-        images: [], // Add image IDs after upload
+        images: ['kg275s3h1nrvsrys3hsc8h9cs57q5akr'], // Add image IDs after upload
         openingHours: [
           {
             day: 0,
@@ -82,7 +82,7 @@ export const seedTouristicSites = mutation({
           neighborhood: "Quartier Royal",
         },
         category: "culturel",
-        images: [], // Add image IDs after upload
+        images: ['kg2d0awbempr5vbppc26hjwbc97q4hf3'],
         openingHours: [
           {
             day: 0,
@@ -138,7 +138,7 @@ export const seedTouristicSites = mutation({
           neighborhood: "Pendjari",
         },
         category: "naturel",
-        images: [], // Add image IDs after upload
+        images: ['kg2eag5nndvwerp094bnnzpe897q43mz'], // Add image IDs after upload
         openingHours: [
           {
             day: 0,
@@ -199,7 +199,7 @@ export const seedTouristicSites = mutation({
           neighborhood: "Centre-ville",
         },
         category: "religieux",
-        images: [], // Add image IDs after upload
+        images: ['kg28arpgtz19qcbtjjxpfpws5s7q5kzp'], // Add image IDs after upload
         openingHours: [
           {
             day: 0,
@@ -277,7 +277,7 @@ export const seedArtisanShops = mutation({
           neighborhood: "Haie Vive",
         },
         categories: ["sculpture", "textile", "bijouterie"],
-        images: [], // Add image IDs after upload
+        images: ['kg24bzyj9wyzt94sbvyty1jexh7q41wz'], // Add image IDs after upload
         openingHours: [
           { day: 0, isClosed: true },
           {
@@ -333,7 +333,7 @@ export const seedArtisanShops = mutation({
           neighborhood: "Hounli",
         },
         categories: ["poterie"],
-        images: [], // Add image IDs after upload
+        images: ['kg26hp8msmrbv43v1aa03c1wr97q5j2y'], // Add image IDs after upload
         openingHours: [
           { day: 0, isClosed: true },
           {
@@ -389,7 +389,7 @@ export const seedArtisanShops = mutation({
           neighborhood: "Dantokpa",
         },
         categories: ["textile"],
-        images: [], // Add image IDs after upload
+        images: ['kg2dfwzk4r2mk2ka1m23dwtv7s7q4pav'], 
         openingHours: [
           {
             day: 0,
@@ -450,7 +450,7 @@ export const seedArtisanShops = mutation({
           neighborhood: "Centre",
         },
         categories: ["vannerie"],
-        images: [], // Add image IDs after upload
+        images: ['kg22rsykc04j03x0vepj10ypa57q6mnf'],
         openingHours: [
           { day: 0, isClosed: true },
           {
