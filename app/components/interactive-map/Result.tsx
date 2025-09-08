@@ -1,66 +1,50 @@
+"use client";
 import React from "react";
 import ItemCard from "./ItemCard";
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 
 const Results: React.FC = () => {
-  const items = [
-    {
-      title: "Porte de Non-Retour",
-      location: "Ouidah",
-      type: "historique",
-      image: "/images/porte-non-retour.jpg",
-    },
-    {
-      title: "Parc National de la Pendjari",
-      location: "Tanguiéta",
-      type: "naturel",
-      image: "/images/pendjari.jpg",
-    },
-    {
-      title: "Temple des Pythons",
-      location: "Ouidah",
-      type: "spirituel",
-      image: "/images/temple-pythons.jpg",
-    },
-    {
-      title: "Palais Royal d’Abomey",
-      location: "Abomey",
-      type: "culturel",
-      image: "/images/palais-abomey.jpg",
-    },
-    {
-      title: "Boutique d’artisanat 1",
-      location: "Ouidah",
-      type: "textile",
-      image: "/images/boutique1.jpg",
-    },
-    {
-      title: "Boutique d’artisanat 2",
-      location: "Abomey",
-      type: "poterie",
-      image: "/images/boutique2.jpg",
-    },
-    {
-      title: "Boutique d’artisanat 3",
-      location: "Tanguiéta",
-      type: "textile",
-      image: "/images/boutique3.jpg",
-    },
-    {
-      title: "Boutique d’artisanat 4",
-      location: "Ouidah",
-      type: "poterie",
-      image: "/images/boutique4.jpg",
-    },
+  // Récupérer les données depuis Convex
+  const touristicSites = useQuery(api.api.touristicSites.getTouristicSites) || [];
+  const artisanShops = useQuery(api.api.artisanShops.getArtisanShops) || [];
+
+  // Combiner et formater les données pour l'affichage
+  const allItems = [
+    ...touristicSites.map((site: any) => ({
+      id: site._id,
+      title: site.name,
+      location: site.location.city,
+      type: site.category,
+      image: site.images[0] || "/images/placeholder.jpg",
+      isSite: true
+    })),
+    ...artisanShops.map((shop: any) => ({
+      id: shop._id,
+      title: shop.name,
+      location: shop.location.city,
+      type: shop.categories.join(', '),
+      image: shop.images[0] || "/images/placeholder.jpg",
+      isSite: false
+    }))
   ];
 
   return (
     <div className="bg-white p-4 rounded-lg shadow mt-4">
       <h3 className="text-lg font-semibold text-brown-600 mb-2">
-        Résultats ({items.length})
+        Résultats ({allItems.length})
       </h3>
       <div className="space-y-4">
-        {items.slice(0, 5).map((item) => (
-          <ItemCard key={item.title} {...item} />
+        {allItems.slice(0, 5).map((item) => (
+          <ItemCard 
+            key={item.id} 
+            title={item.title}
+            location={item.location}
+            type={item.type}
+            image={item.image}
+            isSite={item.isSite}
+            id={item.id}
+          />
         ))}
       </div>
     </div>
