@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Search, Filter, X } from 'lucide-react';
-import { useDebounce } from '@/app/lib/utils';
+import { useDebounce } from '@/app/lib/useDebounce';
 
 const categories = [
   { value: 'culturel', label: 'Culturel' },
