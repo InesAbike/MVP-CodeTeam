@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -32,7 +32,7 @@ export function Footer() {
             <li>À propos</li>
             <li>Contact</li>
             <li>Confidentialité</li>
-            <li>Conditions d'utilisation</li>
+            <li>Conditions d&apos;utilisation</li>
           </ul>
         </div>
 

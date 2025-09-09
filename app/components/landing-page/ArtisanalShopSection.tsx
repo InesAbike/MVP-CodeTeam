@@ -69,7 +69,7 @@ const ArtisanalShopSection = () => {
             Boutiques artisanales populaires
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Entrez en contact avec des artisans locaux et découvrez l'art
+            Entrez en contact avec des artisans locaux et découvrez l&apos;art
             authentique du Bénin.
           </p>
         </div>

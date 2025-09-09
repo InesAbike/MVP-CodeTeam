@@ -11,7 +11,7 @@ interface TouristSiteCardProps {
   location: string;
   rating: number;
   description: string;
-  openingHours: string;
+  openingHours: string | { status: string; color: string };
   price: string;
   accessibility: string;
   image: string;
@@ -25,7 +25,6 @@ const colors: Record<string, string> = {
 };
 
 const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
-  id,
   title,
   category,
   location,
@@ -39,8 +38,16 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
   const colorClass =
     colors[category.toLowerCase()] || "bg-gray-100 text-gray-600";
 
+  const displayHours = typeof openingHours === 'string'
+    ? openingHours
+    : openingHours.status;
+
+  const hoursColor = typeof openingHours === 'object'
+    ? openingHours.color
+    : "text-gray-500";
+
   return (
-    <div className="bg-[#FFFBEB] min-h-screen">
+    <div className="bg-[#FFFBEB]">
       <div className="relative">
         <Image
           src={image}
@@ -75,7 +82,7 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
           </div>
           <div className="flex items-center gap-2">
             <Clock className="w-4 h-4 ml-4" />
-            <span>{openingHours}</span>
+            <span className={hoursColor}>{displayHours}</span>
           </div>
         </div>
         <hr className="my-4 border-t-1 border-gray-200" />

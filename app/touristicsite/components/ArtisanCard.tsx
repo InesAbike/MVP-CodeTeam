@@ -1,5 +1,7 @@
-import React from "react";
+"use client"
 
+import React from "react";
+import Image from "next/image"
 interface ArtisanCardProps {
   name: string;
   location: string;
@@ -14,14 +16,16 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
   image,
 }) => {
   return (
-    <div className="bg-white shadow-md rounded-xl p-3 w-64 flex flex-col">
-      <img
+    <div className="bg-white shadow-md rounded-xl w-full flex gap-2 items-center pe-2">
+      <Image
         src={image}
         alt={name}
-        className="h-32 w-full object-cover rounded-lg"
+        width={1200}
+        height={500}
+        className="h-32 w-full min-w-36 max-w-36 object-cover rounded-l-lg"
       />
-      <div className="mt-2">
-        <h4 className="font-bold text-gray-800">{name}</h4>
+      <div className="flex flex-col gap-1 w-full">
+        <h4 className="font-bold text-gray-800 truncate text-ellipsis overflow-hidden max-w-48">{name}</h4>
         <p className="text-sm text-gray-500">{location}</p>
         <div className="flex flex-wrap gap-1 mt-2">
           {categories.map((cat, i) => (

@@ -86,12 +86,12 @@ export const useCreateTouristicSite = () => {
 
       setIsLoading(false);
       return newSiteId;
-    } catch (e) {
-      console.error("Error creating touristic site:", e);
-      setError((e as Error).message);
-      setIsLoading(false);
-      return null;
-    }
+     } catch (e) {
+       console.error("Error creating touristic site:", e);
+       setError((e as Error).message);
+       setIsLoading(false);
+       return null;
+     }
   };
 
   return { mutate, isLoading, error };
@@ -121,12 +121,12 @@ export const useUpdateTouristicSite = () => {
       await updateTouristicSiteMutation(data);
       setIsLoading(false);
       return true;
-    } catch (e) {
-      console.error("Error updating touristic site:", e);
-      setError((e as Error).message);
-      setIsLoading(false);
-      return false;
-    }
+     } catch (e) {
+       console.error("Error updating touristic site:", e);
+       setError((e as Error).message);
+       setIsLoading(false);
+       return false;
+     }
   };
 
   return { mutate, isLoading, error };
@@ -154,12 +154,12 @@ export const useDeleteTouristicSite = () => {
       await deleteTouristicSiteMutation({ id });
       setIsLoading(false);
       return true;
-    } catch (e) {
-      console.error("Error deleting touristic site:", e);
-      setError((e as Error).message);
-      setIsLoading(false);
-      return false;
-    }
+     } catch (e) {
+       console.error("Error deleting touristic site:", e);
+       setError((e as Error).message);
+       setIsLoading(false);
+       return false;
+     }
   };
 
   return { mutate, isLoading, error };
