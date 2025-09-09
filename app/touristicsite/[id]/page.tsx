@@ -17,11 +17,7 @@ export default function DetailPage() {
   const id = params.id as string;
 
   const site = useGetTouristicSiteById(id as Id<"touristicSites">);
-  const nearbyArtisansWithDetails = useGetNearbyArtisanShopsWithDetailsBySiteId(id as Id<"touristicSites">, 6); // Max 6 artisans proches
-
-  // Debug: Afficher les données reçues
-  console.log("Site:", site);
-  console.log("Nearby artisans with details:", nearbyArtisansWithDetails);
+  const nearbyArtisansWithDetails = useGetNearbyArtisanShopsWithDetailsBySiteId(id as Id<"touristicSites">, 6);
 
   if (site === undefined) {
     return (
@@ -32,7 +28,7 @@ export default function DetailPage() {
   }
 
   if (!site) {
-    return <p className="p-6">Site introuvable</p>;
+    return <p className="p-6 h-screen flex items-center justify-center">Site introuvable</p>;
   }
 
   const transformedSite = {

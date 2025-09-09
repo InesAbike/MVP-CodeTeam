@@ -26,7 +26,7 @@ const TouristSiteCard = ({ id, title, description, imageSrc, imageAlt }: Tourist
         <p className="text-white text-sm mb-4 line-clamp-2">
           {description}
         </p>
-        <Link href={`/${id}`}>
+        <Link href={`/touristicsite/${id}`}>
           <button className="text-white text-sm flex items-center gap-2 hover:gap-3 transition-all duration-200">
             Découvrez maintenant
             <ArrowRightIcon className="w-4 h-4" />
