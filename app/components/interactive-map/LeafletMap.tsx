@@ -33,14 +33,16 @@ const ResizeMap = () => {
 };
 
 const LeafletMap = () => {
-  // Centrer la carte sur le Bénin (Cotonou)
   const position: [number, number] = [6.3714, 2.3544];
 
-  // Récupérer les données depuis Convex
-  const touristicSites = useQuery(api.api.touristicSites.getTouristicSites) || [];
-  const artisanShops = useQuery(api.api.artisanShops.getArtisanShops) || [];
+  const touristicSites = useQuery(api.api.touristicSites.getTouristicSites);
+  const artisanShops = useQuery(api.api.artisanShops.getArtisanShops);
 
-  // Créer des icônes personnalisées
+  const isLoading = touristicSites === undefined || artisanShops === undefined;
+
+  const sites = touristicSites || [];
+  const shops = artisanShops || [];
+
   const createCustomIcon = (color: string) => {
     return L.divIcon({
       className: 'custom-div-icon',
@@ -55,20 +57,28 @@ const LeafletMap = () => {
 
   return (
     <div className="relative w-full h-96 md:h-[600px] rounded-lg overflow-hidden border border-gray-200 shadow-sm">
-      {/* Légende */}
       <div className="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-lg">
         <h4 className="text-sm font-semibold mb-2">Légende</h4>
         <div className="space-y-1">
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-sm"></div>
-            <span className="text-xs">Sites touristiques</span>
+            <span className="text-xs">Sites touristiques ({sites.length})</span>
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 bg-orange-500 rounded-full border-2 border-white shadow-sm"></div>
-            <span className="text-xs">Boutiques artisanales</span>
+            <span className="text-xs">Boutiques artisanales ({shops.length})</span>
           </div>
         </div>
       </div>
+
+      {isLoading && (
+        <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-[999]">
+          <div className="flex flex-col items-center space-y-2">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <div className="text-gray-600">Chargement de la carte...</div>
+          </div>
+        </div>
+      )}
       
       <MapContainer
         center={position}
@@ -81,8 +91,7 @@ const LeafletMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         
-        {/* Marqueurs des sites touristiques */}
-        {touristicSites.map((site: any) => (
+        {sites.map((site: any) => (
           <Marker
             key={`site-${site._id}`}
             position={[site.location.lat, site.location.lng]}
@@ -108,8 +117,7 @@ const LeafletMap = () => {
           </Marker>
         ))}
 
-        {/* Marqueurs des boutiques artisanales */}
-        {artisanShops.map((shop: any) => (
+        {shops.map((shop: any) => (
           <Marker
             key={`shop-${shop._id}`}
             position={[shop.location.lat, shop.location.lng]}
@@ -142,3 +150,4 @@ const LeafletMap = () => {
 };
 
 export default LeafletMap;
+

@@ -29,7 +29,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
         alt={title} 
         className="w-16 h-16 object-cover rounded"
         onError={(e) => {
-          e.currentTarget.src = "/images/placeholder.jpg";
+          e.currentTarget.src = "/images/placeholder.png"
         }}
       />
       <div className="flex-1">

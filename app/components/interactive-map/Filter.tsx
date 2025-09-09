@@ -18,20 +18,22 @@ const Filters: React.FC = () => {
     selectedRegion: "Toutes les régions"
   });
 
-  // Récupérer les données pour extraire les types et régions disponibles
-  const touristicSites = useQuery(api.api.touristicSites.getTouristicSites) || [];
-  const artisanShops = useQuery(api.api.artisanShops.getArtisanShops) || [];
+  const touristicSites = useQuery(api.api.touristicSites.getTouristicSites);
+  const artisanShops = useQuery(api.api.artisanShops.getArtisanShops);
 
-  // Extraire les types uniques
-  const siteTypes = [...new Set(touristicSites.map((site: any) => site.category))];
-  const shopTypes = [...new Set(artisanShops.flatMap((shop: any) => shop.categories))];
+  const isLoading = touristicSites === undefined || artisanShops === undefined;
+
+  const sites = touristicSites || [];
+  const shops = artisanShops || [];
+
+  const siteTypes = [...new Set(sites.map((site: any) => site.category))];
+  const shopTypes = [...new Set(shops.flatMap((shop: any) => shop.categories))];
   const allTypes = [...new Set([...siteTypes, ...shopTypes])];
 
-  // Extraire les régions uniques
   const allRegions = [...new Set([
     "Toutes les régions",
-    ...touristicSites.map((site: any) => site.location.department),
-    ...artisanShops.map((shop: any) => shop.location.department)
+    ...sites.map((site: any) => site.location.department),
+    ...shops.map((shop: any) => shop.location.department)
   ])];
 
   const handleCategoryChange = (category: 'sites' | 'shops', checked: boolean) => {
@@ -57,12 +59,6 @@ const Filters: React.FC = () => {
     }));
   };
 
-  // Passer les filtres au composant parent (pour une future implémentation)
-  useEffect(() => {
-    // Ici on pourrait dispatcher les filtres vers un contexte ou un état global
-    console.log('Filters updated:', filters);
-  }, [filters]);
-
   return (
     <div className="bg-white p-5 rounded-lg border border-gray-200">
       <h3 className="text-lg font-semibold text-brown-600 mb-2">Filtres</h3>
@@ -76,7 +72,7 @@ const Filters: React.FC = () => {
               checked={filters.showSites}
               onChange={(e) => handleCategoryChange('sites', e.target.checked)}
             />
-            <span>Sites touristiques ({touristicSites.length})</span>
+            <span>Sites touristiques ({sites.length})</span>
           </label>
           <label className="flex items-center space-x-2">
             <input 
@@ -85,7 +81,7 @@ const Filters: React.FC = () => {
               checked={filters.showShops}
               onChange={(e) => handleCategoryChange('shops', e.target.checked)}
             />
-            <span>Boutiques d'artisanat ({artisanShops.length})</span>
+            <span>Boutiques d'artisanat ({shops.length})</span>
           </label>
         </div>
         <div className="space-y-4">

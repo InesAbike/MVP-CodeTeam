@@ -5,29 +5,45 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 const Results: React.FC = () => {
-  // Récupérer les données depuis Convex
-  const touristicSites = useQuery(api.api.touristicSites.getTouristicSites) || [];
-  const artisanShops = useQuery(api.api.artisanShops.getArtisanShops) || [];
+  const touristicSites = useQuery(api.api.touristicSites.getTouristicSites);
+  const artisanShops = useQuery(api.api.artisanShops.getArtisanShops);
 
-  // Combiner et formater les données pour l'affichage
+  const isLoading = touristicSites === undefined || artisanShops === undefined;
+
+  const sites = touristicSites || [];
+  const shops = artisanShops || [];
+
   const allItems = [
-    ...touristicSites.map((site: any) => ({
+    ...sites.map((site: any) => ({
       id: site._id,
       title: site.name,
       location: site.location.city,
       type: site.category,
-      image: site.images[0] || "/images/placeholder.jpg",
+      image: site.images && site.images.length > 0 ? site.images[0] : "/images/placeholder.png",
       isSite: true
     })),
-    ...artisanShops.map((shop: any) => ({
+    ...shops.map((shop: any) => ({
       id: shop._id,
       title: shop.name,
       location: shop.location.city,
       type: shop.categories.join(', '),
-      image: shop.images[0] || "/images/placeholder.jpg",
+      image: shop.images && shop.images.length > 0 ? shop.images[0] : "/images/placeholder.png",
       isSite: false
     }))
   ];
+
+
+  if (isLoading) {
+    return (
+      <div className="bg-white p-4 rounded-lg shadow mt-4">
+        <h3 className="text-lg font-semibold text-brown-600 mb-2">Résultats</h3>
+        <div className="flex items-center justify-center py-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <span className="ml-2 text-gray-600">Chargement des données...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white p-4 rounded-lg shadow mt-4">
@@ -35,17 +51,24 @@ const Results: React.FC = () => {
         Résultats ({allItems.length})
       </h3>
       <div className="space-y-4">
-        {allItems.slice(0, 5).map((item) => (
-          <ItemCard 
-            key={item.id} 
-            title={item.title}
-            location={item.location}
-            type={item.type}
-            image={item.image}
-            isSite={item.isSite}
-            id={item.id}
-          />
-        ))}
+        {allItems.length > 0 ? (
+          allItems.slice(0, 5).map((item) => (
+            <ItemCard 
+              key={item.id} 
+              title={item.title}
+              location={item.location}
+              type={item.type}
+              image={item.image}
+              isSite={item.isSite}
+              id={item.id}
+            />
+          ))
+        ) : (
+          <div className="text-center py-8 text-gray-500">
+            <p>Aucun résultat trouvé.</p>
+            <p className="text-sm">Vérifiez que les données sont bien chargées.</p>
+          </div>
+        )}
       </div>
     </div>
   );
