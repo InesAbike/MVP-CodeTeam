@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ConditionalNavbar from "./components/layouts/ConditionalNavbar";
 import { Footer } from "./components/layouts/Footer";
 import { ConvexClientProvider } from "../providers/ConvexClientProvider";
 
@@ -23,9 +24,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ConvexClientProvider>{children}</ConvexClientProvider>
-        <Footer />
+        <ConvexClientProvider>
+        <ConditionalNavbar />
+          {children}
+          <Footer />
+        </ConvexClientProvider>
       </body>
-    </html>
+      </html>
   );
 }
+

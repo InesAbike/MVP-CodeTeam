@@ -3,7 +3,7 @@ import Image from "next/image";
 const HeritageSection=() => {
   return (
     <div className="py-10">
-    <div className="relative w-full h-screen flex items-center justify-center ">
+    <div className="relative w-full h-[500px] flex items-center justify-center ">
       {/* Image de fond */}
       <Image
         src="/images/place-amazone.svg" 
