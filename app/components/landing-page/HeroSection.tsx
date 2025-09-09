@@ -39,7 +39,6 @@ const HeroBenin = () => {
                     <div className="w-8 h-8 bg-white/50 rounded-sm flex items-center justify-center">
                         <div className="text-blue-600 font-bold text-lg">B</div>
                     </div>
-                    <span className="text-white font-semibold text-lg">BÉNIN TOUR</span>
                 </div>
 
                 <div className="hidden md:flex items-center space-x-8">
