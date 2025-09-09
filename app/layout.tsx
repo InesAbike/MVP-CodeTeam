@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "./components/layouts/Footer";
-import NavBar from "./components/layouts/NavBar";
 import { ErrorDisplay } from "./components/ui/ErrorDisplay";
 import { ToastContainer } from "./components/ui/ToastContainer";
 import { ConvexClientProvider } from "../providers/ConvexClientProvider";
@@ -31,7 +30,6 @@ export default function RootLayout({
         <NotificationProvider>
           <ErrorProvider>
             <ConvexClientProvider>
-              <NavBar />
               {children}
               <Footer />
               <ErrorDisplay />
