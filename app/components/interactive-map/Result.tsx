@@ -1,67 +1,74 @@
+"use client";
 import React from "react";
 import ItemCard from "./ItemCard";
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 
 const Results: React.FC = () => {
-  const items = [
-    {
-      title: "Porte de Non-Retour",
-      location: "Ouidah",
-      type: "historique",
-      image: "/images/porte-non-retour.jpg",
-    },
-    {
-      title: "Parc National de la Pendjari",
-      location: "Tanguiéta",
-      type: "naturel",
-      image: "/images/pendjari.jpg",
-    },
-    {
-      title: "Temple des Pythons",
-      location: "Ouidah",
-      type: "spirituel",
-      image: "/images/temple-pythons.jpg",
-    },
-    {
-      title: "Palais Royal d’Abomey",
-      location: "Abomey",
-      type: "culturel",
-      image: "/images/palais-abomey.jpg",
-    },
-    {
-      title: "Boutique d’artisanat 1",
-      location: "Ouidah",
-      type: "textile",
-      image: "/images/boutique1.jpg",
-    },
-    {
-      title: "Boutique d’artisanat 2",
-      location: "Abomey",
-      type: "poterie",
-      image: "/images/boutique2.jpg",
-    },
-    {
-      title: "Boutique d’artisanat 3",
-      location: "Tanguiéta",
-      type: "textile",
-      image: "/images/boutique3.jpg",
-    },
-    {
-      title: "Boutique d’artisanat 4",
-      location: "Ouidah",
-      type: "poterie",
-      image: "/images/boutique4.jpg",
-    },
+  const touristicSites = useQuery(api.api.touristicSites.getTouristicSites);
+  const artisanShops = useQuery(api.api.artisanShops.getArtisanShops);
+
+  const isLoading = touristicSites === undefined || artisanShops === undefined;
+
+  const sites = touristicSites || [];
+  const shops = artisanShops || [];
+
+  const allItems = [
+    ...sites.map((site: any) => ({
+      id: site._id,
+      title: site.name,
+      location: site.location.city,
+      type: site.category,
+      image: site.images && site.images.length > 0 ? site.images[0] : "/images/placeholder.png",
+      isSite: true
+    })),
+    ...shops.map((shop: any) => ({
+      id: shop._id,
+      title: shop.name,
+      location: shop.location.city,
+      type: shop.categories.join(', '),
+      image: shop.images && shop.images.length > 0 ? shop.images[0] : "/images/placeholder.png",
+      isSite: false
+    }))
   ];
+
+
+  if (isLoading) {
+    return (
+      <div className="bg-white p-4 rounded-lg shadow mt-4">
+        <h3 className="text-lg font-semibold text-brown-600 mb-2">Résultats</h3>
+        <div className="flex items-center justify-center py-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <span className="ml-2 text-gray-600">Chargement des données...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white p-4 rounded-lg shadow mt-4">
       <h3 className="text-lg font-semibold text-brown-600 mb-2">
-        Résultats ({items.length})
+        Résultats ({allItems.length})
       </h3>
       <div className="space-y-4">
-        {items.slice(0, 5).map((item) => (
-          <ItemCard key={item.title} {...item} />
-        ))}
+        {allItems.length > 0 ? (
+          allItems.slice(0, 5).map((item) => (
+            <ItemCard 
+              key={item.id} 
+              title={item.title}
+              location={item.location}
+              type={item.type}
+              image={item.image}
+              isSite={item.isSite}
+              id={item.id}
+            />
+          ))
+        ) : (
+          <div className="text-center py-8 text-gray-500">
+            <p>Aucun résultat trouvé.</p>
+            <p className="text-sm">Vérifiez que les données sont bien chargées.</p>
+          </div>
+        )}
       </div>
     </div>
   );

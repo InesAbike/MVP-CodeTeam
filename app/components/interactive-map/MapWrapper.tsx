@@ -2,7 +2,6 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-// Import dynamique du composant Map sans SSR
 const DynamicMap = dynamic(() => import('./LeafletMap'), {
   ssr: false,
   loading: () => (
