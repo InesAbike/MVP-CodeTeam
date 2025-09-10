@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import ArtisanalShopCard from "./ArtisanalShopCard";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
+import { useGetTopArtisanShops } from "@/services/index";
+import ArtisanalShopSkeleton  from "@/app/components/skeletons/ArtisanalShopSkeleton";
 
 const ArtisanalShopSection = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -42,43 +44,22 @@ const ArtisanalShopSection = () => {
     };
   }, [emblaApi, onSelect]);
 
-  const artisanalShops = [
-    {
-      id: 1,
-      name: "Artisanat Béninois",
-      location: "Cotonou",
-      categories: ["sculptures", "textiles", "bijoux"],
-      imageSrc: "/images/artisanal-shop-img/weaver-shop.svg",
-    },
-    {
-      id: 2,
-      name: "Atelier Traditionnel",
-      location: "Ouidah",
-      categories: ["poterie", "vannerie", "tissage"],
-      imageSrc: "/images/artisanal-shop-img/weaver-shop.svg",
-    },
-    {
-      id: 3,
-      name: "Créations Locales",
-      location: "Abomey",
-      categories: ["bronze", "cuir", "tissus"],
-      imageSrc: "/images/artisanal-shop-img/weaver-shop.svg",
-    },
-    {
-      id: 4,
-      name: "Créations Locales",
-      location: "Abomey",
-      categories: ["bronze", "cuir", "tissus"],
-      imageSrc: "/images/artisanal-shop-img/weaver-shop.svg",
-    },
-    {
-      id: 5,
-      name: "Créations Locales",
-      location: "Abomey",
-      categories: ["bronze", "cuir", "tissus"],
-      imageSrc: "/images/artisanal-shop-img/weaver-shop.svg",
-    },
-  ];
+  const shopsData = useGetTopArtisanShops();
+
+  const artisanalShops = shopsData?.map((shop) => ({
+    id: shop._id,
+    name: shop.name,
+    location: shop.location.city,
+    categories: shop.categories,
+    imageSrc: shop.images[0] || "/images/artisanal-shop-img/weaver-shop.svg",
+  })) || [];
+
+
+
+
+
+  // Loading state
+  const isLoading = !shopsData;
 
   return (
     <section className="py-8 px-6">
@@ -88,7 +69,7 @@ const ArtisanalShopSection = () => {
             Boutiques artisanales populaires
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Entrez en contact avec des artisans locaux et découvrez l'art
+            Entrez en contact avec des artisans locaux et découvrez l&apos;art
             authentique du Bénin.
           </p>
         </div>
@@ -96,16 +77,23 @@ const ArtisanalShopSection = () => {
         <div className="relative">
           <div className="embla overflow-hidden" ref={emblaRef}>
             <div className="embla__container flex gap-6">
-              {artisanalShops.map((shop) => (
-                <div key={shop.id} className="embla__slide flex-[0_0_35%]">
-                  <ArtisanalShopCard
-                    name={shop.name}
-                    location={shop.location}
-                    categories={shop.categories}
-                    imageSrc={shop.imageSrc}
-                  />
-                </div>
-              ))}
+              {isLoading ? (
+                // Show 4 skeleton cards while loading
+                Array.from({ length: 4 }).map((_, index) => (
+                  <ArtisanalShopSkeleton key={`skeleton-${index}`} />
+                ))
+              ) : (
+                artisanalShops.map((shop) => (
+                  <div key={shop.id} className="embla__slide flex-[0_0_375px]">
+                    <ArtisanalShopCard
+                      name={shop.name}
+                      location={shop.location}
+                      categories={shop.categories}
+                      imageSrc={shop.imageSrc}
+                    />
+                  </div>
+                ))
+              )}
             </div>
           </div>
 

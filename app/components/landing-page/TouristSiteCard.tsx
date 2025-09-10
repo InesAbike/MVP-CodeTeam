@@ -1,20 +1,36 @@
+"use client"
+
 import React from "react";
+import { useRouter } from "next/navigation";
 import { ArrowRightIcon } from "lucide-react";
+import Image from "next/image";
 
 interface TouristSiteCardProps {
+  id: string;
   title: string;
   description: string;
   imageSrc: string;
   imageAlt: string;
 }
 
-const TouristSiteCard = ({ title, description, imageSrc, imageAlt }: TouristSiteCardProps) => {
+const TouristSiteCard = ({ id, title, description, imageSrc, imageAlt }: TouristSiteCardProps) => {
+  const router = useRouter();
+  
+  const handleClick = () => {
+    router.push(`/touristicsite/${id}`);
+  };
+
   return (
-    <div className="h-[450px] rounded-xl relative overflow-hidden group">
-      <img
+    <div 
+      className="h-[450px] rounded-xl relative overflow-hidden group cursor-pointer"
+      onClick={handleClick}
+    >
+      <Image
         src={imageSrc}
         alt={imageAlt}
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-125"
+        width={500}
+        height={500}
       />
 
       <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-xl"></div>

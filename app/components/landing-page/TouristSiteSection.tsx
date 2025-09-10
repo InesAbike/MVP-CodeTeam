@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import TouristSiteCard from "./TouristSiteCard";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useGetTouristicSites } from "@/services/touristicSites";
+import TouristSiteSkeleton from "@/app/components/skeletons/TouristSiteSkeleton";
 
 const TouristSiteSection = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -42,43 +44,18 @@ const TouristSiteSection = () => {
     };
   }, [emblaApi, onSelect]);
 
-  const touristSites = [
-    {
-      title: "Porte du Non Retour",
-      description:
-        "Un mémorial imposant commémorant la traite négrière transatlantique, situé sur la magnifique côte de Ouidah.",
-      imageSrc: "/images/tourist-site-img/porte-non-retour.jpg",
-      imageAlt: "Porte du Non Retour à Ouidah",
-    },
-    {
-      title: "Palais Royal d'Abomey",
-      description:
-        "Découvrez l'histoire fascinante du royaume du Dahomey à travers ses palais royaux classés au patrimoine mondial.",
-      imageSrc: "/images/decouverte.jpeg",
-      imageAlt: "Palais Royal d'Abomey",
-    },
-    {
-      title: "Village Lacustre de Ganvié",
-      description:
-        "Explorez la 'Venise de l'Afrique', un village construit sur pilotis au cœur du lac Nokoué, unique en son genre.",
-      imageSrc: "/images/zone-indu.jpg",
-      imageAlt: "Village Lacustre de Ganvié",
-    },
-    {
-      title: "Village Lacustre de Ganvié",
-      description:
-        "Explorez la 'Venise de l'Afrique', un village construit sur pilotis au cœur du lac Nokoué, unique en son genre.",
-      imageSrc: "/images/zone-indu.jpg",
-      imageAlt: "Village Lacustre de Ganvié",
-    },
-    {
-      title: "Village Lacustre de Ganvié",
-      description:
-        "Explorez la 'Venise de l'Afrique', un village construit sur pilotis au cœur du lac Nokoué, unique en son genre.",
-      imageSrc: "/images/zone-indu.jpg",
-      imageAlt: "Village Lacustre de Ganvié",
-    },
-  ];
+  const sitesData = useGetTouristicSites();
+
+  const touristSites = sitesData?.map((site) => ({
+    id: site._id,
+    title: site.name,
+    description: site.description,
+    imageSrc: site.images[0] || "/images/tourist-site-img/porte-non-retour.jpg",
+    imageAlt: `${site.name} - ${site.location.city}`,
+  })) || [];
+
+  // Loading state
+  const isLoading = !sitesData;
 
   return (
     <section className="py-12 px-6">
@@ -100,16 +77,24 @@ const TouristSiteSection = () => {
         <div className="relative">
           <div className="embla overflow-hidden" ref={emblaRef}>
             <div className="embla__container flex gap-6 w-full">
-              {touristSites.map((site, index) => (
-                <div key={index} className="embla__slide flex-[0_0_375px]">
-                  <TouristSiteCard
-                    title={site.title}
-                    description={site.description}
-                    imageSrc={site.imageSrc}
-                    imageAlt={site.imageAlt}
-                  />
-                </div>
-              ))}
+              {isLoading ? (
+                // Show 4 skeleton cards while loading
+                Array.from({ length: 4 }).map((_, index) => (
+                  <TouristSiteSkeleton key={`skeleton-${index}`} />
+                ))
+              ) : (
+                touristSites.map((site, index) => (
+                  <div key={index} className="embla__slide flex-[0_0_375px]">
+                    <TouristSiteCard
+                      id={site.id}
+                      title={site.title}
+                      description={site.description}
+                      imageSrc={site.imageSrc}
+                      imageAlt={site.imageAlt}
+                    />
+                  </div>
+                ))
+              )}
             </div>
           </div>
 
