@@ -4,7 +4,7 @@ import TouristSiteCard from "./TouristSiteCard";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useGetTouristicSites } from "@/services/touristicSites";
-import TouristSiteSkeleton from "@/app/components/skeletons/TouristSiteSkeleton";
+import TouristSiteSkeleton from "@/app/components/landing-page/skeletons/TouristSiteSkeleton";
 
 const TouristSiteSection = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({

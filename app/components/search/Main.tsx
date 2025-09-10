@@ -12,8 +12,8 @@ import type { TouristicSite } from '@/types/touristic.types';
 import type { ArtisanShop } from '@/types/artisan.types';
 import ArtisanalShopCard from '@/app/components/landing-page/ArtisanalShopCard';
 import TouristSiteCard from '@/app/components/landing-page/TouristSiteCard';
-import ArtisanalShopSkeleton from '@/app/components/skeletons/ArtisanalShopSkeleton';
-import TouristSiteSkeleton from '@/app/components/skeletons/TouristSiteSkeleton';
+import ArtisanalShopSkeleton from '@/app/components/landing-page/skeletons/ArtisanalShopSkeleton';
+import TouristSiteSkeleton from '@/app/components/landing-page/skeletons/TouristSiteSkeleton';
 
 type SearchCategory = 'all' | 'sites' | 'artisans';
 

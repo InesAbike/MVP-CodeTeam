@@ -4,7 +4,7 @@ import ArtisanalShopCard from "./ArtisanalShopCard";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useGetTopArtisanShops } from "@/services/index";
-import ArtisanalShopSkeleton  from "@/app/components/skeletons/ArtisanalShopSkeleton";
+import ArtisanalShopSkeleton  from "@/app/components/landing-page/skeletons/ArtisanalShopSkeleton";
 
 const ArtisanalShopSection = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({

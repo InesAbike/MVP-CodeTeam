@@ -23,23 +23,23 @@ async function searchTouristicSites(ctx: any, args: SearchArgs, limit: number) {
 
   // Apply filters in JavaScript
   let filteredSites = allSites.filter((site: any) => {
-    // Filter by city
-    if (args.city && site.location.city !== args.city) {
+    // Filter by city (case-insensitive)
+    if (args.city && safeLowerCase(site.location.city) !== safeLowerCase(args.city)) {
       return false;
     }
 
-    // Filter by department
-    if (args.department && site.location.department !== args.department) {
+    // Filter by department (case-insensitive)
+    if (args.department && safeLowerCase(site.location.department) !== safeLowerCase(args.department)) {
       return false;
     }
 
-    // Filter by neighborhood
-    if (args.neighborhood && site.location.neighborhood !== args.neighborhood) {
+    // Filter by neighborhood (case-insensitive)
+    if (args.neighborhood && safeLowerCase(site.location.neighborhood) !== safeLowerCase(args.neighborhood)) {
       return false;
     }
 
-    // Filter by category
-    if (args.category && site.category !== args.category) {
+    // Filter by category (case-insensitive)
+    if (args.category && safeLowerCase(site.category) !== safeLowerCase(args.category)) {
       return false;
     }
 
@@ -79,23 +79,23 @@ async function searchArtisanShops(ctx: any, args: SearchArgs, limit: number) {
 
   // Apply filters in JavaScript
   let filteredShops = allShops.filter((shop: any) => {
-    // Filter by city
-    if (args.city && shop.location.city !== args.city) {
+    // Filter by city (case-insensitive)
+    if (args.city && safeLowerCase(shop.location.city) !== safeLowerCase(args.city)) {
       return false;
     }
 
-    // Filter by department
-    if (args.department && shop.location.department !== args.department) {
+    // Filter by department (case-insensitive)
+    if (args.department && safeLowerCase(shop.location.department) !== safeLowerCase(args.department)) {
       return false;
     }
 
-    // Filter by neighborhood
-    if (args.neighborhood && shop.location.neighborhood !== args.neighborhood) {
+    // Filter by neighborhood (case-insensitive)
+    if (args.neighborhood && safeLowerCase(shop.location.neighborhood) !== safeLowerCase(args.neighborhood)) {
       return false;
     }
 
-    // Filter by category (array contains)
-    if (args.category && !shop.categories.includes(args.category)) {
+    // Filter by category (array contains, case-insensitive)
+    if (args.category && !shop.categories.some((cat: string) => safeLowerCase(cat) === safeLowerCase(args.category))) {
       return false;
     }
 
@@ -205,8 +205,9 @@ export const searchArtisanShopsOnly = query({
     neighborhood: v.optional(v.string()),
     limit: v.optional(v.number()),
   },
-  handler: async (ctx, args) => {
-    const limit = args.limit || 20;
-    return await searchArtisanShops(ctx, args, limit);
-  },
-});
+   handler: async (ctx, args) => {
+     const limit = args.limit || 20;
+     return await searchArtisanShops(ctx, args, limit);
+   },
+ });
+
