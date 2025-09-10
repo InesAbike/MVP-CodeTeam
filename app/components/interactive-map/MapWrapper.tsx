@@ -2,6 +2,12 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+interface MapWrapperProps {
+  sites: any[];
+  shops: any[];
+  isLoading: boolean;
+}
+
 const DynamicMap = dynamic(() => import('./LeafletMap'), {
   ssr: false,
   loading: () => (
@@ -14,8 +20,8 @@ const DynamicMap = dynamic(() => import('./LeafletMap'), {
   )
 });
 
-const MapWrapper = () => {
-  return <DynamicMap />;
+const MapWrapper: React.FC<MapWrapperProps> = ({ sites, shops, isLoading }) => {
+  return <DynamicMap sites={sites} shops={shops} isLoading={isLoading} />;
 };
 
 export default MapWrapper;
