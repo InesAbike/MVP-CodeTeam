@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import type { ArtisanShop, CreateArtisanShopDTO, UpdateArtisanShopDTO, NearbyArtisanShopsDTO, NearbyArtisanShopResult } from "@/types/artisan.types";
+import type { ArtisanShop, CreateArtisanShopDTO, UpdateArtisanShopDTO} from "@/types/artisan.types";
 import { Id } from "@/convex/_generated/dataModel";
 
 
@@ -29,14 +29,43 @@ export const useGetArtisanShopById = (id: Id<"artisanShops">): ArtisanShop | nul
   return useQuery(api.api.artisanShops.getArtisanShopById, { id });
 };
 
+
+
 /**
- * Hook to find nearby artisan shops based on geographic coordinates.
- * Note: This hook returns basic location data. You may need to fetch full shop details separately.
- * @param args - The arguments for the nearby search.
- * @returns An array of nearby shops with their ID and coordinates, or undefined while loading.
+ * Hook to find nearby artisan shops with full details based on a touristic site ID.
+ * This hook fetches the touristic site and then gets nearby artisans with complete data in one query.
+ * @param siteId - The ID of the touristic site to use as reference point.
+ * @param maxResults - Optional maximum number of results to return.
+ * @param maxDistance - Optional maximum distance in kilometers.
+ * @returns An array of nearby artisans with full details and distance, or undefined while loading.
  */
-export const useGetNearbyArtisanShops = (args: NearbyArtisanShopsDTO): NearbyArtisanShopResult[] | undefined => {
-  return useQuery(api.api.artisanShops.getNearbyArtisanShops, args);
+export const useGetNearbyArtisanShopsWithDetailsBySiteId = (
+  siteId: Id<"touristicSites">,
+  maxResults?: number,
+  maxDistance?: number
+): Array<{ artisan: ArtisanShop; distance: number }> | undefined => {
+  // Get the touristic site
+  const site = useQuery(api.api.touristicSites.getTouristicSiteById, { id: siteId });
+
+  // Get nearby artisans with full details using site's coordinates
+  const nearbyArtisansWithDetails = useQuery(
+    api.api.artisanShops.getNearbyArtisanShopsWithDetails,
+    site ? {
+      lat: site.location.lat,
+      lng: site.location.lng,
+      maxResults,
+      maxDistance,
+    } : {
+      lat: 0,
+      lng: 0,
+      maxResults: 0,
+    }
+  );
+
+  // Filter out null values and return
+  return nearbyArtisansWithDetails?.filter((item): item is { artisan: ArtisanShop; distance: number } =>
+    item !== null
+  );
 };
 
 //================================================================================================
@@ -99,12 +128,12 @@ export const useCreateArtisanShop = () => {
 
       setIsLoading(false);
       return newShopId;
-    } catch (e) {
-      console.error("Error creating artisan shop:", e);
-      setError((e as Error).message);
-      setIsLoading(false);
-      return null;
-    }
+     } catch (e) {
+       console.error("Error creating artisan shop:", e);
+       setError((e as Error).message);
+       setIsLoading(false);
+       return null;
+     }
   };
 
   return { mutate, isLoading, error };
@@ -134,12 +163,12 @@ export const useUpdateArtisanShop = () => {
       await updateArtisanShopMutation(data);
       setIsLoading(false);
       return true;
-    } catch (e) {
-      console.error("Error updating artisan shop:", e);
-      setError((e as Error).message);
-      setIsLoading(false);
-      return false;
-    }
+     } catch (e) {
+       console.error("Error updating artisan shop:", e);
+       setError((e as Error).message);
+       setIsLoading(false);
+       return false;
+     }
   };
 
   return { mutate, isLoading, error };
@@ -167,12 +196,12 @@ export const useDeleteArtisanShop = () => {
       await deleteArtisanShopMutation({ id });
       setIsLoading(false);
       return true;
-    } catch (e) {
-      console.error("Error deleting artisan shop:", e);
-      setError((e as Error).message);
-      setIsLoading(false);
-      return false;
-    }
+     } catch (e) {
+       console.error("Error deleting artisan shop:", e);
+       setError((e as Error).message);
+       setIsLoading(false);
+       return false;
+     }
   };
 
   return { mutate, isLoading, error };

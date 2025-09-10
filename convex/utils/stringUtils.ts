@@ -11,7 +11,8 @@
  * safeLowerCase("Hello World") // "hello world"
  * safeLowerCase(null) // ""
  * safeLowerCase(123) // "123"
- * safeLowerCase({}) // ""
+ * safeLowerCase({}) // "[object Object]"
+ * safeLowerCase(true) // "true"
  */
 export function safeLowerCase(value: any): string {
   if (value === null || value === undefined) {
@@ -26,8 +27,17 @@ export function safeLowerCase(value: any): string {
     return value.toString().toLowerCase();
   }
 
-  // Pour les objets ou autres types, on retourne une string vide
-  return "";
+  if (typeof value === "boolean") {
+    return value.toString().toLowerCase();
+  }
+
+  // Pour les objets et autres types, essayer de les convertir en string
+  try {
+    const strValue = String(value);
+    return strValue.toLowerCase();
+  } catch {
+    return "";
+  }
 }
 
 /**

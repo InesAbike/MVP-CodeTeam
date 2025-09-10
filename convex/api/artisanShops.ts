@@ -168,3 +168,50 @@ export const getNearbyArtisanShops = query({
     return result;
   },
 });
+
+/**
+ * Get nearby artisan shops with full details.
+ * @param lat - Latitude of the reference point.
+ * @param lng - Longitude of the reference point.
+ * @param maxResults - Maximum number of results to return.
+ * @param maxDistance - Maximum distance in kilometers.
+ * @returns {Promise<Array<{artisan: object, distance: number}>>} List of nearby artisan shops with full details and distance.
+ */
+export const getNearbyArtisanShopsWithDetails = query({
+  args: {
+    lat: v.number(),
+    lng: v.number(),
+    maxResults: v.optional(v.number()),
+    maxDistance: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const maxResults = args.maxResults || 10;
+    const nearbyResults = await geospatial.queryNearest(
+      ctx,
+      { latitude: args.lat, longitude: args.lng },
+      maxResults,
+      args.maxDistance
+    );
+
+    // Get full details for each nearby artisan
+    const artisansWithDetails = await Promise.all(
+      nearbyResults.map(async (result: any) => {
+        const artisan = await ctx.db.get(result.key);
+        if (!artisan) return null;
+
+        // Map the image StorageIDs to full URLs
+        const imageUrls = await Promise.all(
+          artisan.images.map((imageId: string) => ctx.storage.getUrl(imageId))
+        );
+
+        return {
+          artisan: { ...artisan, images: imageUrls.filter(Boolean) },
+          distance: result.distance,
+        };
+      })
+    );
+
+    // Filter out null results (artisans that don't exist)
+    return artisansWithDetails.filter(Boolean);
+  },
+});
