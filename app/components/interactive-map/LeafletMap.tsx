@@ -6,9 +6,7 @@ import "leaflet/dist/leaflet.css";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
-
+import { ArrowRightIcon } from "lucide-react";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -16,7 +14,6 @@ L.Icon.Default.mergeOptions({
   iconUrl: markerIcon.src || markerIcon,
   shadowUrl: markerShadow.src || markerShadow,
 });
-
 
 const ResizeMap = () => {
   const map = useMap();
@@ -32,32 +29,30 @@ const ResizeMap = () => {
   return null;
 };
 
-const LeafletMap = () => {
+interface LeafletMapProps {
+  sites: any[];
+  shops: any[];
+  isLoading: boolean;
+}
+
+const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
   const position: [number, number] = [6.3714, 2.3544];
-
-  const touristicSites = useQuery(api.api.touristicSites.getTouristicSites);
-  const artisanShops = useQuery(api.api.artisanShops.getArtisanShops);
-
-  const isLoading = touristicSites === undefined || artisanShops === undefined;
-
-  const sites = touristicSites || [];
-  const shops = artisanShops || [];
 
   const createCustomIcon = (color: string) => {
     return L.divIcon({
-      className: 'custom-div-icon',
+      className: "custom-div-icon",
       html: `<div style="background-color: ${color}; width: 20px; height: 20px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
       iconSize: [20, 20],
-      iconAnchor: [10, 10]
+      iconAnchor: [10, 10],
     });
   };
 
-  const touristicIcon = createCustomIcon('#3B82F6'); // Bleu pour sites touristiques
-  const artisanIcon = createCustomIcon('#F59E0B'); // Orange pour boutiques artisanales
+  const touristicIcon = createCustomIcon("#3B82F6");
+  const artisanIcon = createCustomIcon("#F59E0B");
 
   return (
     <div className="relative w-full h-96 md:h-[600px] rounded-lg overflow-hidden border border-gray-200 shadow-sm">
-      <div className="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-lg">
+      <div className="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-lg z-[1000]">
         <h4 className="text-sm font-semibold mb-2">Légende</h4>
         <div className="space-y-1">
           <div className="flex items-center space-x-2">
@@ -66,7 +61,9 @@ const LeafletMap = () => {
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 bg-orange-500 rounded-full border-2 border-white shadow-sm"></div>
-            <span className="text-xs">Boutiques artisanales ({shops.length})</span>
+            <span className="text-xs">
+              Boutiques artisanales ({shops.length})
+            </span>
           </div>
         </div>
       </div>
@@ -79,7 +76,7 @@ const LeafletMap = () => {
           </div>
         </div>
       )}
-      
+
       <MapContainer
         center={position}
         zoom={8}
@@ -90,7 +87,7 @@ const LeafletMap = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        
+
         {sites.map((site: any) => (
           <Marker
             key={`site-${site._id}`}
@@ -99,17 +96,24 @@ const LeafletMap = () => {
           >
             <Popup>
               <div className="p-2">
-                <h3 className="font-semibold text-blue-600 mb-1">{site.name}</h3>
-                <p className="text-sm text-gray-600 mb-2">{site.description.substring(0, 100)}...</p>
+                <h3 className="font-semibold text-blue-600 mb-1">
+                  {site.name}
+                </h3>
+                <p className="text-sm text-gray-600 mb-2">
+                  {site.description
+                    ? site.description.substring(0, 100) + "..."
+                    : "Aucune description disponible"}
+                </p>
                 <div className="flex items-center justify-between">
                   <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
                     {site.category}
                   </span>
-                  <a 
-                    href={`/site/${site._id}`}
-                    className="text-blue-600 text-xs hover:underline"
+                  <a
+                    href={`/touristicsite/${site._id}`}
+                    className="text-blue-600 text-xs hover:underline flex items-center gap-1"
                   >
-                    Voir détails →
+                    Voir détails
+                    <ArrowRightIcon className="w-3 h-3" />
                   </a>
                 </div>
               </div>
@@ -125,24 +129,33 @@ const LeafletMap = () => {
           >
             <Popup>
               <div className="p-2">
-                <h3 className="font-semibold text-orange-600 mb-1">{shop.name}</h3>
-                <p className="text-sm text-gray-600 mb-2">{shop.description.substring(0, 100)}...</p>
+                <h3 className="font-semibold text-orange-600 mb-1">
+                  {shop.name}
+                </h3>
+                <p className="text-sm text-gray-600 mb-2">
+                  {shop.description
+                    ? shop.description.substring(0, 100) + "..."
+                    : "Aucune description disponible"}
+                </p>
                 <div className="flex items-center justify-between">
                   <span className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">
-                    {shop.categories.join(', ')}
+                    {shop.categories
+                      ? shop.categories.join(", ")
+                      : "Non spécifié"}
                   </span>
-                  <a 
-                    href={`/boutique/${shop._id}`}
-                    className="text-orange-600 text-xs hover:underline"
+                  <a
+                    href={`/artisanshop/${shop._id}`}
+                    className="text-orange-600 text-xs hover:underline flex items-center gap-1"
                   >
-                    Voir détails →
+                    Voir détails 
+                    <ArrowRightIcon className="w-3 h-3" />
                   </a>
                 </div>
               </div>
             </Popup>
           </Marker>
         ))}
-        
+
         <ResizeMap />
       </MapContainer>
     </div>
@@ -150,4 +163,3 @@ const LeafletMap = () => {
 };
 
 export default LeafletMap;
-

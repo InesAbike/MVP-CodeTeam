@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import React, { useState } from "react";
+import { TouristicSite } from "@/types/touristic.types";
+import { ArtisanShop } from "@/types/artisan.types";
 
 interface FilterState {
   showSites: boolean;
@@ -10,7 +10,13 @@ interface FilterState {
   selectedRegion: string;
 }
 
-const Filters: React.FC = () => {
+interface FiltersProps {
+  sites: any[];
+  shops: any[];
+  isLoading: boolean;
+}
+
+const Filters: React.FC<FiltersProps> = ({ sites, shops, isLoading }) => {
   const [filters, setFilters] = useState<FilterState>({
     showSites: true,
     showShops: true,
@@ -18,22 +24,15 @@ const Filters: React.FC = () => {
     selectedRegion: "Toutes les régions"
   });
 
-  const touristicSites = useQuery(api.api.touristicSites.getTouristicSites);
-  const artisanShops = useQuery(api.api.artisanShops.getArtisanShops);
-
-  const isLoading = touristicSites === undefined || artisanShops === undefined;
-
-  const sites = touristicSites || [];
-  const shops = artisanShops || [];
-
-  const siteTypes = [...new Set(sites.map((site: any) => site.category))];
-  const shopTypes = [...new Set(shops.flatMap((shop: any) => shop.categories))];
+  /* Extraire les types de sites touristiques, de boutiques artisanales ainsi que les régions */
+  const siteTypes = [...new Set(sites.map((site: TouristicSite) => site.category))];
+  const shopTypes = [...new Set(shops.flatMap((shop: ArtisanShop) => shop.categories))];
   const allTypes = [...new Set([...siteTypes, ...shopTypes])];
 
   const allRegions = [...new Set([
     "Toutes les régions",
-    ...sites.map((site: any) => site.location.department),
-    ...shops.map((shop: any) => shop.location.department)
+    ...sites.map((site: TouristicSite) => site.location.department),
+    ...shops.map((shop: ArtisanShop) => shop.location.department)
   ])];
 
   const handleCategoryChange = (category: 'sites' | 'shops', checked: boolean) => {
@@ -87,7 +86,7 @@ const Filters: React.FC = () => {
         <div className="space-y-4">
           <h4 className="text-md font-medium">Types</h4>
           <div className="grid grid-cols-2 gap-1 max-h-32 overflow-y-auto">
-            {allTypes.map((type: string, index: number) => (
+            {allTypes.map((type: string) => (
               <label key={type} className="flex items-center space-x-2">
                 <input
                   type="checkbox"
