@@ -52,8 +52,8 @@ export default function DetailPage() {
       <TouristSiteCard {...transformedSite} />
 
        {/* Composant Artisans */}
-       <div className="max-w-3xl mx-auto ">
-         <h3 className="text-base md:text-lg font-semibold mb-4 flex items-center gap-2 text-[#78350F]">
+       <div className="max-w-3xl mx-auto pb-5 ">
+         <h3 className="text-base md:text-lg font-semibold mb-4 flex items-center gap-2 text-[#78350F] ps-2">
            <RiShoppingBag3Line className="w-6 h-6" />
            <span>Artisanat à proximité</span>
          </h3>
