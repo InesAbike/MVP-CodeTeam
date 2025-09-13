@@ -22,7 +22,7 @@ export default function DetailPage() {
 
   if (site === undefined) {
     return (
-      <div className="space-y-6 bg-[#FFFBEB] min-h-screen p-6">
+      <div className="space-y-6 bg-[#FFFBEB] min-h-screen p-6 ">
         <TouristSiteCardSkeleton />
       </div>
     );
@@ -52,7 +52,7 @@ export default function DetailPage() {
       <TouristSiteCard {...transformedSite} />
 
        {/* Composant Artisans */}
-       <div className="max-w-3xl mx-auto mb-5">
+       <div className="max-w-3xl mx-auto ">
          <h3 className="text-base md:text-lg font-semibold mb-4 flex items-center gap-2 text-[#78350F]">
            <RiShoppingBag3Line className="w-6 h-6" />
            <span>Artisanat à proximité</span>
