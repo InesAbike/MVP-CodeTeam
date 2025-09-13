@@ -4,7 +4,8 @@ import ArtisanalShopCard from "./ArtisanalShopCard";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useGetTopArtisanShops } from "@/services/index";
-import ArtisanalShopSkeleton  from "@/app/components/landing-page/skeletons/ArtisanalShopSkeleton";
+import ArtisanalShopSkeleton from "@/app/components/landing-page/skeletons/ArtisanalShopSkeleton";
+import Link from "next/link";
 
 const ArtisanalShopSection = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -85,13 +86,16 @@ const ArtisanalShopSection = () => {
               ) : (
                 artisanalShops.map((shop) => (
                   <div key={shop.id} className="embla__slide flex-[0_0_375px]">
+                  <Link href={`/artisanat-shop/${shop.id}`}>
                     <ArtisanalShopCard
+                      id={shop.id}
                       name={shop.name}
                       location={shop.location}
                       categories={shop.categories}
                       imageSrc={shop.imageSrc}
                     />
-                  </div>
+                  </Link>
+                </div>
                 ))
               )}
             </div>
@@ -102,22 +106,20 @@ const ArtisanalShopSection = () => {
               <button
                 onClick={scrollPrev}
                 disabled={!prevBtnEnabled}
-                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
-                  prevBtnEnabled
+                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${prevBtnEnabled
                     ? "bg-white hover:bg-gray-50 text-gray-600"
                     : "bg-gray-200 text-gray-400 cursor-not-allowed"
-                }`}
+                  }`}
               >
                 <ArrowLeft className="w-6 h-6" />
               </button>
               <button
                 onClick={scrollNext}
                 disabled={!nextBtnEnabled}
-                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
-                  nextBtnEnabled
+                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${nextBtnEnabled
                     ? "bg-white hover:bg-gray-50 text-gray-600"
                     : "bg-gray-200 text-gray-400 cursor-not-allowed"
-                }`}
+                  }`}
               >
                 <ArrowRight className="w-6 h-6" />
               </button>

@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { Search, Play, MapPin, DollarSign } from 'lucide-react';
 import Image from 'next/image';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
+import { CiMap } from 'react-icons/ci';
+import { FaMap } from 'react-icons/fa';
 
-const HeroBenin = () => {
+const Hero = () => {
     const [searchData, setSearchData] = useState({
         tourName: '',
         price: '',
@@ -36,8 +38,8 @@ const HeroBenin = () => {
             {/* Navigation */}
             <nav className="relative z-10 flex items-center justify-between px-6 lg:px-12 py-6">
                 <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 bg-white/50 rounded-sm flex items-center justify-center">
-                        <div className="text-blue-600 font-bold text-lg">B</div>
+                    <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                        <div className="text-white text-lg"><FaMap /></div>
                     </div>
                 </div>
 
@@ -177,10 +179,10 @@ const HeroBenin = () => {
                             {/* Main Circle */}
                             <div className="w-96 h-96 bg-[url(/images/decouverte.jpeg)] rounded-full border-4 border-white border-opacity-30 bg-white backdrop-blur-md flex items-center justify-center relative overflow-hidden">
 
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-20">
-                            
-                        </div>
-                         
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-20">
+
+                                </div>
+
 
                                 {/* Play Button */}
                                 <div className="absolute inset-0 flex items-center justify-center z-30">
@@ -243,4 +245,4 @@ const HeroBenin = () => {
     );
 };
 
-export default HeroBenin;
+export default Hero;

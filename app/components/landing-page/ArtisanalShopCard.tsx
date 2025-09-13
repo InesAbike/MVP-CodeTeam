@@ -1,8 +1,10 @@
 import React from "react";
 import { MapPin, Share2, SquareArrowOutUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ArtisanalShopCardProps {
+  id: string;
   name: string;
   location: string;
   categories: string[];
@@ -10,6 +12,7 @@ interface ArtisanalShopCardProps {
 }
 
 const ArtisanalShopCard = ({
+  id,
   name,
   location,
   categories,
@@ -49,9 +52,11 @@ const ArtisanalShopCard = ({
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <Share2 className="w-4 h-4 text-gray-600" />
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <SquareArrowOutUpRight className="w-4 h-4 text-gray-600" />
-            </button>
+            <Link href={`/artisanat-shop/${id}`}>
+              <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <SquareArrowOutUpRight className="w-4 h-4 text-gray-600" />
+              </button>
+            </Link>
           </div>
         </div>
       </div>
