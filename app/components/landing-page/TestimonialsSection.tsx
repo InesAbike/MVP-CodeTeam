@@ -1,3 +1,5 @@
+"use client";
+import React from "react";
 import { Marquee } from "./Marquee";
 import Image from "next/image";
 
@@ -92,7 +94,7 @@ const TestimonialCard = ({
   userImage,
 }: TestimonialCardProps) => {
   return (
-    <div className="bg-black/20 rounded-xl p-4 text-white max-w-sm">
+    <div className="bg-white rounded-xl p-4 border border-gray-200 text-gray-900 max-w-sm">
       <p className="text-sm leading-relaxed mb-4">{text}</p>
       <div className="flex items-center">
         {userImage ? (
@@ -106,11 +108,11 @@ const TestimonialCard = ({
             />
           </div>
         ) : (
-          <div className="w-8 h-8 bg-gray-600 rounded-full mr-3 flex-shrink-0"></div>
+          <div className="w-8 h-8 bg-gray-300 rounded-full mr-3 flex-shrink-0"></div>
         )}
         <div className="min-w-0">
           <div className="text-sm font-medium truncate">{userName}</div>
-          <div className="text-xs text-gray-400 truncate">{userHandle}</div>
+          <div className="text-xs text-gray-500 truncate">{userHandle}</div>
         </div>
       </div>
     </div>
@@ -129,7 +131,7 @@ export function TestimonialsSection() {
         </p>
       </div>
 
-      <div className="relative md:hidden bg-black/80 h-[400px] max-w-7xl mx-auto overflow-hidden rounded-2xl">
+      <div className="relative md:hidden bg-white h-[400px] max-w-7xl mx-auto overflow-hidden rounded-2xl">
         <div className="py-4">
           <Marquee
             pauseOnHover
@@ -171,11 +173,11 @@ export function TestimonialsSection() {
           </Marquee>
         </div>
 
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10"></div>
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l from-black/80 via-black/40 to-transparent z-10"></div>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-gray-100/80 via-gray-100 to-transparent z-10"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l from-gray-100/80 via-gray-100 to-transparent z-10"></div>
       </div>
 
-      <div className="relative hidden md:flex bg-black/80 h-[450px] max-w-7xl mx-auto items-center justify-center overflow-hidden rounded-2xl">
+      <div className="relative hidden md:flex bg-white h-[450px] max-w-7xl mx-auto items-center justify-center overflow-hidden rounded-2xl">
         <div className="flex w-full h-full px-4">
           <Marquee
             pauseOnHover
@@ -236,8 +238,8 @@ export function TestimonialsSection() {
             )}
           </Marquee>
         </div>
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/6 bg-gradient-to-b from-black/80 via-black/60 to-transparent z-10"></div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-black/80 via-black/60 to-transparent z-10"></div>
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/6 bg-gradient-to-b from-gray-100/80 via-gray-100/60 to-transparent z-10"></div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-gray-100/80 via-gray-100/60 to-transparent z-10"></div>
       </div>
     </div>
   );
