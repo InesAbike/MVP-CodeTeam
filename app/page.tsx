@@ -14,7 +14,7 @@ import CTASection from './components/landing-page/CTASection'
         <TouristSiteSection />
         <DecouverteSection />
         <ArtisanalShopSection />
-        <CulturalEventsSection/>
+        {/* <CulturalEventsSection/> */}
         <TestimonialsSection/>
         <CTASection/>
     </div>
