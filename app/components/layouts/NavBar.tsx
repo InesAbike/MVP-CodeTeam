@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Heart, Phone, MessageCircle, Star, Menu, X, Bell, MapPin } from 'lucide-react';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
+import { FaMap } from 'react-icons/fa';
 const NavBar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -10,8 +11,8 @@ const NavBar = () => {
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <div className="flex items-center space-x-2">
-                        <div className="w-8 h-8 bg-white/50 rounded-sm flex items-center justify-center">
-                            <div className="text-blue-600 font-bold text-lg">B</div>
+                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                            <div className="text-white text-lg"><FaMap  /></div>
                         </div>
                     </div>
 
