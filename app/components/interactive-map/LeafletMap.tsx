@@ -10,6 +10,7 @@ import { MapPinIcon, RefreshCwIcon, SquareArrowOutUpRight } from "lucide-react";
 import { useGeolocation } from "../../hooks/useGeolocation";
 import { TouristicSite } from "@/types/touristic.types";
 import { ArtisanShop } from "@/types/artisan.types";
+import LeafletMapSkeleton from "./skeletons/LeafletMapSkeleton";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -69,7 +70,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
 
   return (
     <div className="relative w-full h-96 md:h-[600px] rounded-lg overflow-hidden border border-gray-200">
-      <div className="absolute top-4 right-4 bg-white p-3 rounded-lg">
+      <div className="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-sm z-50">
         <h4 className="text-sm font-semibold mb-2">Légende</h4>
         <div className="space-y-1">
           {userPosition && (
@@ -92,16 +93,15 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
       </div>
 
       {isGettingLocation && (
-        <div className="absolute top-4 left-4 bg-white p-2 rounded-lg">
+        <div className="absolute top-4 left-4 bg-white p-2 rounded-lg shadow-sm z-50">
           <div className="flex items-center space-x-2">
-            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
             <span className="text-xs text-gray-600">Localisation...</span>
           </div>
         </div>
       )}
 
       {geolocationError && (
-        <div className="absolute top-4 left-4 bg-yellow-50 border border-yellow-200 p-2 rounded-lg">
+        <div className="absolute top-4 left-4 bg-yellow-50 border border-yellow-200 p-2 rounded-lg shadow-sm z-50">
           <div className="flex items-center space-x-2">
             <span className="text-xs text-yellow-700">
               ⚠️ {geolocationError}
@@ -110,7 +110,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
         </div>
       )}
 
-      <div className="absolute bottom-4 right-4">
+      <div className="absolute bottom-4 right-4 z-50">
         <button
           onClick={centerOnUserLocation}
           disabled={isGettingLocation}
@@ -118,7 +118,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
           title="Centrer sur ma position"
         >
           {isGettingLocation ? (
-            <RefreshCwIcon className="w-5 h-5 text-blue-600 animate-spin" />
+            <RefreshCwIcon className="w-5 h-5 text-blue-600" />
           ) : (
             <MapPinIcon className="w-5 h-5 text-blue-600" />
           )}
@@ -126,11 +126,8 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
       </div>
 
       {isLoading && (
-        <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-[999]">
-          <div className="flex flex-col items-center space-y-2">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <div className="text-gray-600">Chargement de la carte...</div>
-          </div>
+        <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-30">
+          <LeafletMapSkeleton />
         </div>
       )}
 

@@ -33,7 +33,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
       role="article"
       aria-label={`${title} - ${type} à ${location}`}
     >
-      <div className="relative w-32 h-32 flex-shrink-0">
+      <div className="relative w-28 h-28 flex-shrink-0">
         <Image
           src={image}
           alt={`${title} image`}
