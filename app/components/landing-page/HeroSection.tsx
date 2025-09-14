@@ -67,7 +67,7 @@ const Hero = () => {
                         Destinations
                     </a>
                     <a href="#" className="text-white hover:text-blue-200 transition-colors">
-                        Circuits Touristiques
+                        Carte Interactive
                     </a>
                     <a href="#" className="text-white hover:text-blue-200 transition-colors">
                         Artisanat
@@ -102,7 +102,7 @@ const Hero = () => {
                         ></div>
 
                         {/* Menu Mobile */}
-                        <div className="fixed top-0 right-0 h-full w-50 max-w-sm bg-gradient-to-br from-blue-600 to-purple-700 backdrop-blur-lg z-50 transform transition-transform duration-300 ease-in-out">
+                        <div className="fixed top-0 right-0 h-full w-full sm:w-1/2 bg-green-900 backdrop-blur-lg z-50 transform transition-transform duration-300 ease-in-out">
                             {/* Header du menu */}
                             <div className="flex items-center justify-between p-6 border-b border-white/20">
                                 <div className="flex items-center space-x-2">
@@ -139,7 +139,7 @@ const Hero = () => {
                                     className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
                                     onClick={closeMenu}
                                 >
-                                    Circuits Touristiques
+                                    Carte Interactive
                                 </a>
                                 <a
                                     href="#"
