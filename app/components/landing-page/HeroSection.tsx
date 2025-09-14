@@ -67,7 +67,7 @@ const Hero = () => {
                         Destinations
                     </a>
                     <a href="#" className="text-white hover:text-blue-200 transition-colors">
-                        Circuits Touristiques
+                        Carte Interactive
                     </a>
                     <a href="#" className="text-white hover:text-blue-200 transition-colors">
                         Artisanat
@@ -139,7 +139,7 @@ const Hero = () => {
                                     className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
                                     onClick={closeMenu}
                                 >
-                                    Circuits Touristiques
+                                    Carte Interactive
                                 </a>
                                 <a
                                     href="#"

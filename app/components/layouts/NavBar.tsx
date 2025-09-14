@@ -35,7 +35,7 @@ const NavBar = () => {
                     Destinations
                 </a>
                 <a href="#" className="text-gray-500 hover:text-gray-400 transition-colors">
-                    Circuits Touristiques
+                Carte Interactive
                 </a>
                 <a href="#" className="text-gray-500 hover:text-gray-400 transition-colors">
                     Artisanat
@@ -107,7 +107,7 @@ const NavBar = () => {
                                 className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b border-white/10"
                                 onClick={closeMenu}
                             >
-                                Circuits Touristiques
+                              Carte Interactive
                             </a>
                             <a
                                 href="#"
