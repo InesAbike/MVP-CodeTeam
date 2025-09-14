@@ -3,6 +3,9 @@ import Image from 'next/image';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
 import { FaMap } from 'react-icons/fa';
 import { HiMenu, HiX } from 'react-icons/hi';
+import Link from 'next/link';
+
+
 const NavBar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,18 +31,18 @@ const NavBar = () => {
 
             {/* Menu Desktop */}
             <div className="hidden md:flex items-center space-x-8">
-                <a href="#" className="text-gray-500 hover:text-gray-400 transition-colors">
+                <Link href="#" className="text-gray-500 hover:text-gray-400 transition-colors">
                     Accueil
-                </a>
-                <a href="#" className="text-gray-500 hover:text-gray-400 transition-colors">
-                    Destinations
-                </a>
-                <a href="#" className="text-gray-500 hover:text-gray-400 transition-colors">
+                </Link>
+                <Link href="#" className="text-gray-500 hover:text-gray-400 transition-colors">
+                    A propos
+                </Link>
+                <Link href="/interactive-map" className="text-gray-500 hover:text-gray-400 transition-colors">
                 Carte Interactive
-                </a>
-                <a href="#" className="text-gray-500 hover:text-gray-400 transition-colors">
-                    Artisanat
-                </a>
+                </Link>
+                <Link href="/search" className="text-gray-500    hover:text-gray-400 transition-colors">
+                    Culture
+                </Link>
             </div>
 
             {/* Boutons Desktop + Menu Hamburger */}
@@ -88,34 +91,35 @@ const NavBar = () => {
 
                         {/* Items du menu */}
                         <div className="flex flex-col p-4">
-                            <a
+                            <Link
                                 href="#"
-                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b border-white/10"
+                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b sm:border-b border-none border-white/10"
                                 onClick={closeMenu}
                             >
                                 Accueil
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="#"
-                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b border-white/10"
+                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b sm:border-none border-white/10"
                                 onClick={closeMenu}
                             >
-                                Destinations
-                            </a>
-                            <a
-                                href="#"
-                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b border-white/10"
+                                A propos
+                            </Link>
+                            <Link
+                                href="/interactive-map"
+                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b sm:border-none border-white/10"
                                 onClick={closeMenu}
                             >
+               
                               Carte Interactive
-                            </a>
-                            <a
-                                href="#"
-                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b border-white/10"
+                            </Link>
+                            <Link
+                                href="/search"
+                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b sm:border-none border-white/10"
                                 onClick={closeMenu}
                             >
-                                Artisanat
-                            </a>
+                                Culture
+                            </Link>
 
                             {/* Bouton Contact Mobile dans le menu */}
                             <button

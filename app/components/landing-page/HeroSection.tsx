@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { Search, Play, MapPin, DollarSign } from 'lucide-react';
 import Image from 'next/image';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
-import { CiMap } from 'react-icons/ci';
 import { FaMap } from 'react-icons/fa';
 import { HiMenu, HiX } from 'react-icons/hi';
+import Link from 'next/link';
 
 const Hero = () => {
     const [searchData, setSearchData] = useState({
@@ -60,18 +60,18 @@ const Hero = () => {
 
                 {/* Menu Desktop */}
                 <div className="hidden md:flex items-center space-x-8">
-                    <a href="#" className="text-white hover:text-blue-200 transition-colors">
+                    <Link href="#" className="text-white hover:text-blue-200 transition-colors">
                         Accueil
-                    </a>
-                    <a href="#" className="text-white hover:text-blue-200 transition-colors">
-                        Destinations
-                    </a>
-                    <a href="#" className="text-white hover:text-blue-200 transition-colors">
+                    </Link>
+                    <Link href="#" className="text-white hover:text-blue-200 transition-colors">
+                        A propos
+                    </Link>
+                    <Link href="/interactive-map" className="text-white hover:text-blue-200 transition-colors">
                         Carte Interactive
-                    </a>
-                    <a href="#" className="text-white hover:text-blue-200 transition-colors">
-                        Artisanat
-                    </a>
+                    </Link>
+                    <Link href="/search" className="text-white hover:text-blue-200 transition-colors">
+                        Culture
+                    </Link>
                 </div>
 
                 {/* Boutons Desktop + Menu Hamburger */}
@@ -120,34 +120,34 @@ const Hero = () => {
 
                             {/* Items du menu */}
                             <div className="flex flex-col p-4">
-                                <a
+                                <Link
                                     href="#"
-                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
+                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 sm:border-b border-none sm:border-white/10"
                                     onClick={closeMenu}
                                 >
                                     Accueil
-                                </a>
-                                <a
+                                </Link>
+                                <Link
                                     href="#"
-                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
+                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 sm:border-b border-none sm:border-white/10"
                                     onClick={closeMenu}
                                 >
-                                    Destinations
-                                </a>
-                                <a
-                                    href="#"
-                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
+                                    A propos
+                                </Link>
+                                <Link
+                                    href="/interactive-map"
+                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 sm:border-b border-none sm:border-white/10"
                                     onClick={closeMenu}
                                 >
                                     Carte Interactive
-                                </a>
-                                <a
-                                    href="#"
-                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
+                                </Link>
+                                <Link
+                                    href="/search"
+                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 sm:border-b border-none sm:border-white/10"
                                     onClick={closeMenu}
                                 >
-                                    Artisanat
-                                </a>
+                                Culture
+                                </Link>
 
                                 {/* Bouton Contact Mobile dans le menu */}
                                 <button
