@@ -4,20 +4,27 @@ import ItemCard from "./ItemCard";
 import { TouristicSite } from "@/types/touristic.types";
 import { ArtisanShop } from "@/types/artisan.types";
 import ResultsSkeleton from "./skeletons/ResultSkeleton";
+import { FilterState } from "./Filter";
 
 interface ResultsProps {
   sites: TouristicSite[];
   shops: ArtisanShop[];
   isLoading: boolean;
+  filters: FilterState;
 }
 
-const Results: React.FC<ResultsProps> = ({ sites, shops, isLoading }) => {
+const Results: React.FC<ResultsProps> = ({
+  sites,
+  shops,
+  isLoading,
+  filters,
+}) => {
   const [showAll, setShowAll] = useState(false);
   const itemsPerPage = 4;
 
   useEffect(() => {
     setShowAll(false);
-  }, [sites, shops]);
+  }, [sites, shops, filters]);
 
   const allItems = [
     ...sites.map((site) => ({
@@ -38,7 +45,20 @@ const Results: React.FC<ResultsProps> = ({ sites, shops, isLoading }) => {
     })),
   ].sort((a, b) => a.title.localeCompare(b.title));
 
-  const displayedItems = showAll ? allItems : allItems.slice(0, itemsPerPage);
+  const filteredItems = allItems.filter((item) => {
+    if (item.isSite && !filters.showSites) return false;
+    if (!item.isSite && !filters.showShops) return false;
+
+    if (filters.selectedTypes.length > 0) {
+      const itemTypes = Array.isArray(item.type) ? item.type : [item.type];
+      if (!itemTypes.some((type) => filters.selectedTypes.includes(type))) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  const displayedItems = showAll ? filteredItems : filteredItems.slice(0, itemsPerPage);
   const hasMoreItems = allItems.length > itemsPerPage;
   if (isLoading) {
     return (
@@ -52,11 +72,11 @@ const Results: React.FC<ResultsProps> = ({ sites, shops, isLoading }) => {
   return (
     <div className="bg-white p-4 border border-gray-200 rounded-lg">
       <h3 className="text-lg font-semibold text-brown-600 mb-2">
-        Résultats ({allItems.length})
+        Résultats ({filteredItems.length})
       </h3>
 
       <div className="space-y-2 grid grid-cols-1 min-[992px]:grid-cols-2 xl:grid-cols-1 gap-4">
-        {allItems.length > 0 ? (
+        {filteredItems.length > 0 ? (
           <>
             {displayedItems.map((item) => (
               <ItemCard
@@ -83,7 +103,7 @@ const Results: React.FC<ResultsProps> = ({ sites, shops, isLoading }) => {
                   ) : (
                     <>
                       <span>
-                        Voir plus ({allItems.length - itemsPerPage} autres)
+                        Voir plus ({filteredItems.length - itemsPerPage} autres)
                       </span>
                     </>
                   )}
