@@ -93,21 +93,21 @@ const NavBar = () => {
                         <div className="flex flex-col p-4">
                             <Link
                                 href="#"
-                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b sm:border-b border-none border-white/10"
+                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3"
                                 onClick={closeMenu}
                             >
                                 Accueil
                             </Link>
                             <Link
                                 href="#"
-                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b sm:border-none border-white/10"
+                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3"
                                 onClick={closeMenu}
                             >
                                 A propos
                             </Link>
                             <Link
                                 href="/interactive-map"
-                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b sm:border-none border-white/10"
+                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3"
                                 onClick={closeMenu}
                             >
                
@@ -115,7 +115,7 @@ const NavBar = () => {
                             </Link>
                             <Link
                                 href="/search"
-                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3 border-b sm:border-none border-white/10"
+                                className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3"
                                 onClick={closeMenu}
                             >
                                 Culture

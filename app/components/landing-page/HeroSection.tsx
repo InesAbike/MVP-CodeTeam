@@ -122,28 +122,28 @@ const Hero = () => {
                             <div className="flex flex-col p-4">
                                 <Link
                                     href="#"
-                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 sm:border-b border-none sm:border-white/10"
+                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3"
                                     onClick={closeMenu}
                                 >
                                     Accueil
                                 </Link>
                                 <Link
                                     href="#"
-                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 sm:border-b border-none sm:border-white/10"
+                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3"
                                     onClick={closeMenu}
                                 >
                                     A propos
                                 </Link>
                                 <Link
                                     href="/interactive-map"
-                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 sm:border-b border-none sm:border-white/10"
+                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3"
                                     onClick={closeMenu}
                                 >
                                     Carte Interactive
                                 </Link>
                                 <Link
                                     href="/search"
-                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 sm:border-b border-none sm:border-white/10"
+                                    className="text-white hover:text-blue-200 transition-colors text-lg py-3"
                                     onClick={closeMenu}
                                 >
                                 Culture
