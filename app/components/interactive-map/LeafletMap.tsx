@@ -70,7 +70,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
 
   return (
     <div className="relative w-full h-96 md:h-[600px] rounded-lg overflow-hidden border border-gray-200">
-      <div className="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-sm z-50">
+      <div className="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-sm z-30">
         <h4 className="text-sm font-semibold mb-2">Légende</h4>
         <div className="space-y-1">
           {userPosition && (
@@ -93,7 +93,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
       </div>
 
       {isGettingLocation && (
-        <div className="absolute top-4 left-4 bg-white p-2 rounded-lg shadow-sm z-50">
+        <div className="absolute top-4 left-4 bg-white p-2 rounded-lg shadow-sm z-30">
           <div className="flex items-center space-x-2">
             <span className="text-xs text-gray-600">Localisation...</span>
           </div>
@@ -101,7 +101,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
       )}
 
       {geolocationError && (
-        <div className="absolute top-4 left-4 bg-yellow-50 border border-yellow-200 p-2 rounded-lg shadow-sm z-50">
+        <div className="absolute bottom-4 left-4 bg-yellow-50 border border-yellow-200 p-2 rounded-lg shadow-sm z-20">
           <div className="flex items-center space-x-2">
             <span className="text-xs text-yellow-700">
               ⚠️ {geolocationError}
@@ -110,7 +110,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
         </div>
       )}
 
-      <div className="absolute bottom-4 right-4 z-50">
+      <div className="absolute bottom-4 right-4 z-30">
         <button
           onClick={centerOnUserLocation}
           disabled={isGettingLocation}
@@ -126,7 +126,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
       </div>
 
       {isLoading && (
-        <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-30">
+        <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-20">
           <LeafletMapSkeleton />
         </div>
       )}
