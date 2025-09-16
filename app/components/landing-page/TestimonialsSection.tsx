@@ -121,12 +121,12 @@ const TestimonialCard = ({
 
 export function TestimonialsSection() {
   return (
-    <div className="py-16">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+    <div className="py-16 max-w-7xl mx-auto">
+      <div className="mb-12">
+        <h2 className="text-2xl md:text-3xl xl:text-4xl font-bold text-gray-900 mb-4">
           Témoignages de nos voyageurs
         </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base md:text-lg text-gray-600 max-w-2xl max-md:mx-auto leading-relaxed">
           Découvrez ce que nos utilisateurs disent de leur expérience
         </p>
       </div>
@@ -148,7 +148,7 @@ export function TestimonialsSection() {
                     userImage={testimonial.userImage}
                   />
                 </div>
-              )
+              ),
             )}
           </Marquee>
 
@@ -168,7 +168,7 @@ export function TestimonialsSection() {
                     userImage={testimonial.userImage}
                   />
                 </div>
-              )
+              ),
             )}
           </Marquee>
         </div>
@@ -195,7 +195,7 @@ export function TestimonialsSection() {
                     userImage={testimonial.userImage}
                   />
                 </div>
-              )
+              ),
             )}
           </Marquee>
           <Marquee
@@ -215,7 +215,7 @@ export function TestimonialsSection() {
                     userImage={testimonial.userImage}
                   />
                 </div>
-              )
+              ),
             )}
           </Marquee>
           <Marquee
@@ -234,7 +234,7 @@ export function TestimonialsSection() {
                     userImage={testimonial.userImage}
                   />
                 </div>
-              )
+              ),
             )}
           </Marquee>
         </div>

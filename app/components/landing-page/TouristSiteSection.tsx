@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import TouristSiteCard from "./TouristSiteCard";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useGetTouristicSites } from "@/services/touristicSites";
+import { useGetTopTouristicSites } from "@/services/index";
 import TouristSiteSkeleton from "@/app/components/landing-page/skeletons/TouristSiteSkeleton";
 
 const TouristSiteSection = () => {
@@ -19,12 +19,12 @@ const TouristSiteSection = () => {
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi]
+    [emblaApi],
   );
 
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi]
+    [emblaApi],
   );
 
   const onSelect = useCallback(() => {
@@ -44,30 +44,32 @@ const TouristSiteSection = () => {
     };
   }, [emblaApi, onSelect]);
 
-  const sitesData = useGetTouristicSites();
+  const sitesData = useGetTopTouristicSites();
 
-  const touristSites = sitesData?.map((site) => ({
-    id: site._id,
-    title: site.name,
-    description: site.description,
-    imageSrc: site.images[0] || "/images/tourist-site-img/porte-non-retour.jpg",
-    imageAlt: `${site.name} - ${site.location.city}`,
-  })) || [];
+  const touristSites =
+    sitesData?.map((site) => ({
+      id: site._id,
+      title: site.name,
+      description: site.description,
+      imageSrc:
+        site.images[0] || "/images/tourist-site-img/porte-non-retour.jpg",
+      imageAlt: `${site.name} - ${site.location.city}`,
+    })) || [];
 
   // Loading state
   const isLoading = !sitesData;
 
   return (
-    <section className="py-12 px-6">
+    <section className="py-12 px-3 md:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
+        <div className="flex flex-col mb-8">
           <div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl md:text-3xl xl:text-4xl font-bold text-gray-900 md-2 md:mb-3">
               Sites touristiques populaires
             </h2>
           </div>
           <div>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
               Découvrez les sites touristiques les plus attrayants et les
               trésors culturels du Bénin.
             </p>
@@ -77,24 +79,22 @@ const TouristSiteSection = () => {
         <div className="relative">
           <div className="embla overflow-hidden" ref={emblaRef}>
             <div className="embla__container flex gap-6 w-full">
-              {isLoading ? (
-                // Show 4 skeleton cards while loading
-                Array.from({ length: 4 }).map((_, index) => (
-                  <TouristSiteSkeleton key={`skeleton-${index}`} />
-                ))
-              ) : (
-                touristSites.map((site, index) => (
-                  <div key={index} className="embla__slide flex-[0_0_375px]">
-                    <TouristSiteCard
-                      id={site.id}
-                      title={site.title}
-                      description={site.description}
-                      imageSrc={site.imageSrc}
-                      imageAlt={site.imageAlt}
-                    />
-                  </div>
-                ))
-              )}
+              {isLoading
+                ? // Show 4 skeleton cards while loading
+                  Array.from({ length: 4 }).map((_, index) => (
+                    <TouristSiteSkeleton key={`skeleton-${index}`} />
+                  ))
+                : touristSites.map((site, index) => (
+                    <div key={index} className="embla__slide flex-[0_0_375px]">
+                      <TouristSiteCard
+                        id={site.id}
+                        title={site.title}
+                        description={site.description}
+                        imageSrc={site.imageSrc}
+                        imageAlt={site.imageAlt}
+                      />
+                    </div>
+                  ))}
             </div>
           </div>
 
