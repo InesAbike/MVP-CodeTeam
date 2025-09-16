@@ -31,10 +31,10 @@ const NavBar = () => {
 
             {/* Menu Desktop */}
             <div className="hidden md:flex items-center space-x-8">
-                <Link href="#" className="text-gray-500 hover:text-gray-400 transition-colors">
+                <Link href="/" className="text-gray-500 hover:text-gray-400 transition-colors">
                     Accueil
                 </Link>
-                <Link href="#" className="text-gray-500 hover:text-gray-400 transition-colors">
+                <Link href="/" className="text-gray-500 hover:text-gray-400 transition-colors">
                     A propos
                 </Link>
                 <Link href="/interactive-map" className="text-gray-500 hover:text-gray-400 transition-colors">
@@ -73,7 +73,7 @@ const NavBar = () => {
                     ></div>
 
                     {/* Menu Mobile */}
-                    <div className="fixed top-0 right-0 h-full w-full sm:w-1/2 bg-green-900 backdrop-blur-lg z-50 transform transition-transform duration-300 ease-in-out">
+                    <div className="fixed top-0 right-0 h-full w-full sm:w-1/2 bg-green-900 backdrop-blur-lg z- transform transition-transform duration-300 ease-in-out">
                         {/* Header du menu */}
                         <div className="flex items-center justify-between p-6 border-b border-white/20">
                             <div className="flex items-center space-x-2">
@@ -92,14 +92,14 @@ const NavBar = () => {
                         {/* Items du menu */}
                         <div className="flex flex-col p-4">
                             <Link
-                                href="#"
+                                href="/"
                                 className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3"
                                 onClick={closeMenu}
                             >
                                 Accueil
                             </Link>
                             <Link
-                                href="#"
+                                href="/"
                                 className="text-gray-300 hover:text-gray-500 transition-colors text-lg py-3"
                                 onClick={closeMenu}
                             >
