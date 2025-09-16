@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
 import { FaMap } from 'react-icons/fa';
 import { HiMenu, HiX } from 'react-icons/hi';
@@ -28,6 +27,8 @@ const NavBar = () => {
                     </div>
                 </div>
             </div>
+
+
 
             {/* Menu Desktop */}
             <div className="hidden md:flex items-center space-x-8">

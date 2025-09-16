@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 interface GeolocationState {
   position: [number, number] | null;
@@ -19,7 +19,7 @@ export const useGeolocation = (options: GeolocationOptions = {}) => {
     isLoading: false,
   });
 
-  const position = (pos: GeolocationPosition) => {
+  const position = useCallback((pos: GeolocationPosition) => {
     const coords: [number, number] = [
       pos.coords.latitude,
       pos.coords.longitude,
@@ -29,9 +29,9 @@ export const useGeolocation = (options: GeolocationOptions = {}) => {
       error: null,
       isLoading: false,
     });
-  };
+  }, []);
 
-  const error = (err: GeolocationPositionError) => {
+  const error = useCallback((err: GeolocationPositionError) => {
     let errorMessage = "Erreur de géolocalisation";
     switch (err.code) {
       case err.PERMISSION_DENIED:
@@ -50,17 +50,16 @@ export const useGeolocation = (options: GeolocationOptions = {}) => {
       error: errorMessage,
       isLoading: false,
     });
-  };
+  }, []);
 
-  const defaultOptions: GeolocationOptions = {
+  const defaultOptions = useMemo(() => ({
     enableHighAccuracy: true,
     timeout: 10000,
     maximumAge: 300000, // 5 minutes
     ...options,
-  };
+  }), [options]);
 
-  const getCurrentPosition = (customOptions?: GeolocationOptions) => {
-    
+  const getCurrentPosition = useCallback((customOptions?: GeolocationOptions) => {
     if (!navigator.geolocation) {
       setState((prev) => ({
         ...prev,
@@ -75,12 +74,12 @@ export const useGeolocation = (options: GeolocationOptions = {}) => {
     const options = { ...defaultOptions, ...customOptions };
 
     navigator.geolocation.getCurrentPosition(position, error, options);
-  };
+  }, [defaultOptions, position, error]);
 
   // Auto-fetch on mount
   useEffect(() => {
     getCurrentPosition();
-  }, []);
+  }, [getCurrentPosition]);
 
   return {
     ...state,

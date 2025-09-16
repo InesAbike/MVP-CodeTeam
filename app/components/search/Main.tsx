@@ -138,7 +138,7 @@ export const Main = () => {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {artisans?.map((artisan: ArtisanShop) => (
-                    <ArtisanalShopCard key={artisan._id} name={artisan.name} location={artisan.location.city} categories={artisan.categories} imageSrc={artisan.images[0]} />
+                    <ArtisanalShopCard key={artisan._id} id={artisan._id} name={artisan.name} location={artisan.location.city} categories={artisan.categories} imageSrc={artisan.images[0]} />
                   ))}
                 </div>
                 {artisans?.length === 0 && (

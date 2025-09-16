@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Search, Play, MapPin, DollarSign } from "lucide-react";
 import Image from "next/image";
 import { BsArrowRightCircleFill } from "react-icons/bs";
-import { CiMap } from "react-icons/ci";
 import { FaMap } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useRouter } from "next/navigation";

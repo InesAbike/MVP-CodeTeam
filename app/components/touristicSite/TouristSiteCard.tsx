@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { Clock, MapPin, Star } from "lucide-react";
 import Image from "next/image";
@@ -38,16 +39,14 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
   const colorClass =
     colors[category.toLowerCase()] || "bg-gray-100 text-gray-600";
 
-  const displayHours = typeof openingHours === 'string'
-    ? openingHours
-    : openingHours.status;
+  const displayHours =
+    typeof openingHours === "string" ? openingHours : openingHours.status;
 
-  const hoursColor = typeof openingHours === 'object'
-    ? openingHours.color
-    : "text-gray-500";
+  const hoursColor =
+    typeof openingHours === "object" ? openingHours.color : "text-gray-500";
 
   return (
-    <div className="bg-[#FFFBEB]">
+    <div className="bg-gray-50">
       <div className="relative">
         <Image
           src={image}
@@ -104,7 +103,7 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
             <FiInfo className="size-5 text-[#D97706]" />
             <div className="flex flex-col gap-2">
               <p>
-                <span className="font-semibold">Tarif d'entrée :</span> {price}
+                <span className="font-semibold">Tarif d&apos;entrée :</span> {price}
               </p>
               <p>
                 <span className="font-semibold">Accessibilité :</span>{" "}
@@ -115,10 +114,14 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
         </div>
 
         {/* Bouton */}
-        <button className="w-full mt-5 py-2 bg-[#D97706] text-white text-center font-medium rounded-lg hover:bg-orange-600 transition flex justify-center items-center gap-2">
-          <FaRegHeart className="size-6 text-white" />
-          <span className="font-semibold text-lg">Ajouter à l'itinéraire</span>
-        </button>
+        <Link href="/interactive-map" className="w-full">
+          <button className="w-full mt-5 py-2 bg-green-700 text-white text-center font-medium rounded-lg hover:bg-green-900 transition flex justify-center items-center gap-2 cursor-pointer">
+            <FaRegHeart className="size-6 text-white" />
+            <span className="font-semibold text-lg">
+              Ajouter à l&apos;itinéraire
+            </span>
+          </button>
+        </Link>
       </div>
     </div>
   );
