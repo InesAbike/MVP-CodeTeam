@@ -69,7 +69,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
   const userIcon = createCustomIcon("#EF4444");
 
   return (
-    <div className="relative w-full h-96 md:h-[600px] rounded-lg overflow-hidden border border-gray-200">
+    <div className="relative w-full h-[450px] md:h-[600px] rounded-lg overflow-hidden border border-gray-200">
       <div className="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-sm z-30">
         <h4 className="text-sm font-semibold mb-2">Légende</h4>
         <div className="space-y-1">
