@@ -26,6 +26,7 @@ const NearbyArtisansList: React.FC<NearbyArtisansListProps> = ({
       {artisans.slice(0, maxItems).map((item) => (
         <ArtisanCard
           key={item.artisan._id}
+          id={item.artisan._id}
           name={item.artisan.name}
           location={`${item.artisan.location.city}, ${item.artisan.location.department} (${item.distance.toFixed(1)} km)`}
           categories={item.artisan.categories}

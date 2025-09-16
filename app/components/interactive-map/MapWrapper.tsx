@@ -2,9 +2,12 @@
 import dynamic from "next/dynamic";
 import React from "react";
 
+import { TouristicSite } from "@/types/touristic.types";
+import { ArtisanShop } from "@/types/artisan.types";
+
 interface MapWrapperProps {
-  sites: any[];
-  shops: any[];
+  sites: TouristicSite[];
+  shops: ArtisanShop[];
   isLoading: boolean;
 }
 
@@ -19,7 +22,6 @@ const MapWrapper: React.FC<MapWrapperProps> = ({ sites, shops, isLoading }) => {
       <DynamicMap sites={sites} shops={shops} isLoading={isLoading} />
     </div>
   );
-  <DynamicMap sites={sites} shops={shops} isLoading={isLoading} />;
 };
 
 export default MapWrapper;

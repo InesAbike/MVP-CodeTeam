@@ -37,11 +37,6 @@ const DetailsShop = () => {
     return days[dayIndex] || "";
   }
 
-  // Obtenir le nom du jour actuel
-  const getCurrentDayName = (): string => {
-    return getDayName(new Date().getDay());
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       {shop === undefined ? (
@@ -145,7 +140,7 @@ const DetailsShop = () => {
                 {/* About Section */}
                 <section className="bg-white rounded-lg p-6">
                   <h1 className="text-2xl text-gray-900 mb-4">
-                    À propos de l'atelier
+                    À propos de l&apos;atelier
                   </h1>
                   <div className="text-gray-700 space-y-4">
                     {shop.description}

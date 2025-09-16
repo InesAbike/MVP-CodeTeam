@@ -103,7 +103,7 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
             <FiInfo className="size-5 text-[#D97706]" />
             <div className="flex flex-col gap-2">
               <p>
-                <span className="font-semibold">Tarif d'entrée :</span> {price}
+                <span className="font-semibold">Tarif d&apos;entrée :</span> {price}
               </p>
               <p>
                 <span className="font-semibold">Accessibilité :</span>{" "}
@@ -118,7 +118,7 @@ const TouristSiteCard: React.FC<TouristSiteCardProps> = ({
           <button className="w-full mt-5 py-2 bg-green-700 text-white text-center font-medium rounded-lg hover:bg-green-900 transition flex justify-center items-center gap-2 cursor-pointer">
             <FaRegHeart className="size-6 text-white" />
             <span className="font-semibold text-lg">
-              Ajouter à l'itinéraire
+              Ajouter à l&apos;itinéraire
             </span>
           </button>
         </Link>

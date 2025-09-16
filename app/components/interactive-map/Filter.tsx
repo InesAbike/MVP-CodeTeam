@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { TouristicSite } from "@/types/touristic.types";
 import { ArtisanShop } from "@/types/artisan.types";
 import { FilterIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";

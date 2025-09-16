@@ -12,7 +12,7 @@ import { TouristicSite } from "@/types/touristic.types";
 import { ArtisanShop } from "@/types/artisan.types";
 import LeafletMapSkeleton from "./skeletons/LeafletMapSkeleton";
 
-delete (L.Icon.Default.prototype as any)._getIconUrl;
+delete (L.Icon.Default.prototype as { _getIconUrl?: string })._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x.src || markerIcon2x,
   iconUrl: markerIcon.src || markerIcon,
@@ -143,7 +143,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {sites.map((site: any) => (
+        {sites.map((site: TouristicSite) => (
           <Marker
             key={`site-${site._id}`}
             position={[site.location.lat, site.location.lng]}
@@ -172,7 +172,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ sites, shops, isLoading }) => {
           </Marker>
         ))}
 
-        {shops.map((shop: any) => (
+        {shops.map((shop: ArtisanShop) => (
           <Marker
             key={`shop-${shop._id}`}
             position={[shop.location.lat, shop.location.lng]}
