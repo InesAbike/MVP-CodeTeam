@@ -4,7 +4,7 @@ import { TouristicSite } from "@/types/touristic.types";
 import { ArtisanShop } from "@/types/artisan.types";
 import { FilterIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
-interface FilterState {
+export interface FilterState {
   showSites: boolean;
   showShops: boolean;
   selectedTypes: string[];
@@ -16,16 +16,18 @@ interface FiltersProps {
   sites: TouristicSite[];
   shops: ArtisanShop[];
   isLoading: boolean;
+  filters: FilterState;
+  setFilters: (filters: FilterState) => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({ sites, shops, isLoading }) => {
-  const [filters, setFilters] = useState<FilterState>({
-    showSites: true,
-    showShops: true,
-    selectedTypes: [],
-    selectedRegion: "Toutes les régions",
-    isOpen: false, 
-  });
+const Filters: React.FC<FiltersProps> = ({ sites, shops, isLoading, filters, setFilters }) => {
+  // const [filters, setFilters] = useState<FilterState>({
+  //   showSites: true,
+  //   showShops: true,
+  //   selectedTypes: [],
+  //   selectedRegion: "Toutes les régions",
+  //   isOpen: false, 
+  // });
 
   const siteTypes = [...new Set(sites.map((site) => site.category))];
   const shopTypes = [...new Set(shops.flatMap((shop) => shop.categories))];
@@ -42,30 +44,30 @@ const Filters: React.FC<FiltersProps> = ({ sites, shops, isLoading }) => {
     category: "sites" | "shops",
     checked: boolean
   ) => {
-    setFilters((prev) => ({
-      ...prev,
+    setFilters({
+      ...filters,
       [category === "sites" ? "showSites" : "showShops"]: checked,
-    }));
+    });
   };
 
   const handleTypeChange = (type: string, checked: boolean) => {
-    setFilters((prev) => ({
-      ...prev,
+    setFilters({
+      ...filters,
       selectedTypes: checked
-        ? [...prev.selectedTypes, type]
-        : prev.selectedTypes.filter((t) => t !== type),
-    }));
+        ? [...filters.selectedTypes, type]
+        : filters.selectedTypes.filter((t) => t !== type),
+    });
   };
 
   const handleRegionChange = (region: string) => {
-    setFilters((prev) => ({
-      ...prev,
+    setFilters({
+      ...filters,
       selectedRegion: region,
-    }));
+    });
   };
 
   const toggleFilters = () => {
-    setFilters((prev) => ({ ...prev, isOpen: !prev.isOpen }));
+    setFilters({ ...filters, isOpen: !filters.isOpen });
   };
 
   return (

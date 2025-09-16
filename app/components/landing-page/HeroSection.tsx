@@ -300,7 +300,7 @@ const Hero = () => {
                       className={`px-4 py-2 rounded-lg text-sm transition-all ${
                         searchData.location === city
                           ? "bg-[#556B2F] text-white"
-                          : "bg-white bg-opacity-20 text-white hover:bg-opacity-30"
+                          : "bg-white/20 text-white hover:bg-opacity-30"
                       }`}
                     >
                       {city}
@@ -315,7 +315,6 @@ const Hero = () => {
                     Effacer filtre
                   </button>
                 </div>
-
                 <button
                   onClick={handleSearch}
                   className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg flex items-center space-x-2 transition-colors"
