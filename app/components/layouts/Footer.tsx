@@ -18,7 +18,7 @@ export function Footer() {
 
         <div className="space-y-6">
           <h3 className="text-lg font-semibold mb-4">Liens rapides</h3>
-          <ul className="text-sm space-y-2">
+          <ul className="text-sm space-y-5">
             <li>Accueil</li>
             <li>Carte interactive</li>
             <li>Rechercher</li>
@@ -28,7 +28,7 @@ export function Footer() {
 
         <div className="space-y-6">
           <h3 className="text-lg font-semibold mb-4">Informations</h3>
-          <ul className="text-sm space-y-2">
+          <ul className="text-sm space-y-5">
             <li>À propos</li>
             <li>Contact</li>
             <li>Confidentialité</li>
@@ -38,7 +38,7 @@ export function Footer() {
 
         <div className="space-y-6">
           <h3 className="text-lg font-semibold mb-4">Suivez-nous</h3>
-          <div className="flex space-x-6">
+          <div className="flex space-x-4">
             <a href="#" aria-label="Facebook">
               <span
                 className="w-8 h-8 inline-block"

@@ -25,7 +25,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
     ? "bg-blue-200 text-blue-800"
     : "bg-orange-200 text-orange-800";
   const linkColor = isSite ? "text-blue-600" : "text-orange-600";
-  const detailUrl = isSite ? `/touristicsite/${id}` : `/artisanshop/${id}`;
+  const detailUrl = isSite ? `/touristicsite/${id}` : `/artisanat-shop/${id}`;
 
   return (
     <div
