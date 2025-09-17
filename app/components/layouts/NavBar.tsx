@@ -74,7 +74,7 @@ const NavBar = () => {
                     ></div>
 
                     {/* Menu Mobile */}
-                    <div className="fixed top-0 right-0 h-full w-full sm:w-1/2 bg-green-900 backdrop-blur-lg z- transform transition-transform duration-300 ease-in-out">
+                    <div className="fixed top-0 right-0 h-full w-full sm:w-1/2 bg-green-900 backdrop-blur-lg z-40 transform transition-transform duration-300 ease-in-out">
                         {/* Header du menu */}
                         <div className="flex items-center justify-between p-6 border-b border-white/20">
                             <div className="flex items-center space-x-2">
