@@ -1,18 +1,9 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ConditionalNavbar from "./components/layouts/ConditionalNavbar";
-import { Footer } from "./components/layouts/Footer";
+import ConditionalNavbar from "../components/layouts/ConditionalNavbar";
+import { Footer } from "../components/layouts/Footer";
 import { ConvexClientProvider } from "../providers/ConvexClientProvider";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { cn } from "@/lib/utils";
+import { tomatoGrotesk } from "@/fonts";
 
 export default function RootLayout({
   children,
@@ -20,17 +11,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="fr" className={cn(tomatoGrotesk.variable)}>
+      <body className={cn("antialiased !font-tomato-grotesk")}>
         <ConvexClientProvider>
-        <ConditionalNavbar />
+          <ConditionalNavbar />
           {children}
           <Footer />
         </ConvexClientProvider>
       </body>
-      </html>
+    </html>
   );
 }
-

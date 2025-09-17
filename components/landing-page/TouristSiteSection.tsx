@@ -1,10 +1,10 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import TouristSiteCard from "./TouristSiteCard";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useGetTopTouristicSites } from "@/services/index";
-import TouristSiteSkeleton from "@/app/components/landing-page/skeletons/TouristSiteSkeleton";
+import TouristSiteSkeleton from "@/components/landing-page/skeletons/TouristSiteSkeleton";
 
 const TouristSiteSection = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -19,12 +19,12 @@ const TouristSiteSection = () => {
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi],
+    [emblaApi]
   );
 
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi],
+    [emblaApi]
   );
 
   const onSelect = useCallback(() => {
@@ -67,6 +67,7 @@ const TouristSiteSection = () => {
             <h2 className="text-2xl md:text-3xl xl:text-4xl font-bold text-gray-900 md-2 md:mb-3">
               Sites touristiques populaires
             </h2>
+            <div className="hidden md:block w-16 h-1 bg-benin-green rounded"></div>
           </div>
           <div>
             <p className="text-base md:text-lg text-gray-600 leading-relaxed">
@@ -105,7 +106,7 @@ const TouristSiteSection = () => {
                 disabled={!prevBtnEnabled}
                 className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
                   prevBtnEnabled
-                    ? "bg-white hover:bg-gray-50 text-gray-600"
+                    ? "bg-white hover:bg-gray-50 text-benin-green ring-1 ring-transparent hover:ring-benin-yellow/40"
                     : "bg-gray-200 text-gray-400 cursor-not-allowed"
                 }`}
               >
@@ -116,7 +117,7 @@ const TouristSiteSection = () => {
                 disabled={!nextBtnEnabled}
                 className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
                   nextBtnEnabled
-                    ? "bg-white hover:bg-gray-50 text-gray-600"
+                    ? "bg-white hover:bg-gray-50 text-benin-green ring-1 ring-transparent hover:ring-benin-yellow/40"
                     : "bg-gray-200 text-gray-400 cursor-not-allowed"
                 }`}
               >

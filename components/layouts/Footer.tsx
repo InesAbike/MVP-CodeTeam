@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -16,21 +18,37 @@ export function Footer() {
 
         <div className="space-y-6">
           <h3 className="text-lg font-semibold mb-4">Liens rapides</h3>
-          <ul className="text-sm space-y-5">
-            <li>Accueil</li>
-            <li>Carte interactive</li>
-            <li>Rechercher</li>
-            <li>Itinéraires</li>
+          <ul className="text-sm space-y-3">
+            <li>
+              <Link href="/">Accueil</Link>
+            </li>
+            <li>
+              <Link href="/interactive-map">Carte interactive</Link>
+            </li>
+            <li>
+              <Link href="/search">Rechercher</Link>
+            </li>
+            <li>
+              <Link href="/itineraries">Itinéraires</Link>
+            </li>
           </ul>
         </div>
 
         <div className="space-y-6">
           <h3 className="text-lg font-semibold mb-4">Informations</h3>
-          <ul className="text-sm space-y-5">
-            <li>À propos</li>
-            <li>Contact</li>
-            <li>Confidentialité</li>
-            <li>Conditions d&apos;utilisation</li>
+          <ul className="text-sm space-y-3">
+            <li>
+              <Link href="/about">À propos</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link href="/privacy">Confidentialité</Link>
+            </li>
+            <li>
+              <Link href="/terms">Conditions d&apos;utilisation</Link>
+            </li>
           </ul>
         </div>
 

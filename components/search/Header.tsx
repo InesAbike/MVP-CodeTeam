@@ -1,34 +1,34 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Search, Filter, X } from 'lucide-react';
-import { useDebounce } from '@/app/lib/useDebounce';
+import { useState, useEffect } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Search, Filter, X } from "lucide-react";
+import { useDebounce } from "@/hooks/useDebounce";
 
 const categories = [
-  { value: 'culturel', label: 'Culturel' },
-  { value: 'naturel', label: 'Naturel' },
-  { value: 'historique', label: 'Historique' },
-  { value: 'artisanal', label: 'Artisanal' },
+  { value: "culturel", label: "Culturel" },
+  { value: "naturel", label: "Naturel" },
+  { value: "historique", label: "Historique" },
+  { value: "artisanal", label: "Artisanal" },
 ];
 
 const priceRanges = [
-  { value: 'free', label: 'Gratuit' },
-  { value: 'cheap', label: '< 5000 FCFA' },
-  { value: 'medium', label: '5000-20000 FCFA' },
-  { value: 'expensive', label: '> 20000 FCFA' },
+  { value: "free", label: "Gratuit" },
+  { value: "cheap", label: "< 5000 FCFA" },
+  { value: "medium", label: "5000-20000 FCFA" },
+  { value: "expensive", label: "> 20000 FCFA" },
 ];
 
 export const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
-    location: searchParams.get('location') || '',
-    category: searchParams.get('category') || '',
-    priceRange: searchParams.get('priceRange') || '',
+    location: searchParams.get("location") || "",
+    category: searchParams.get("category") || "",
+    priceRange: searchParams.get("priceRange") || "",
   });
 
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
@@ -37,9 +37,9 @@ export const Header = () => {
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
     if (debouncedSearchQuery) {
-      params.set('q', debouncedSearchQuery);
+      params.set("q", debouncedSearchQuery);
     } else {
-      params.delete('q');
+      params.delete("q");
     }
     Object.entries(debouncedFilters).forEach(([key, value]) => {
       if (value) {
@@ -57,11 +57,11 @@ export const Header = () => {
 
   const clearFilters = () => {
     setFilters({
-      location: '',
-      category: '',
-      priceRange: '',
+      location: "",
+      category: "",
+      priceRange: "",
     });
-    setSearchQuery('');
+    setSearchQuery("");
   };
 
   return (
@@ -92,7 +92,7 @@ export const Header = () => {
 
         <div
           className={`transition-all duration-300 ease-in-out overflow-hidden ${
-            showFilters ? 'max-h-screen mt-4' : 'max-h-0'
+            showFilters ? "max-h-screen mt-4" : "max-h-0"
           }`}
         >
           <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
@@ -107,26 +107,36 @@ export const Header = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="location"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Localisation
                 </label>
                 <input
                   type="text"
                   id="location"
                   value={filters.location}
-                  onChange={(e) => handleFilterChange('location', e.target.value)}
+                  onChange={(e) =>
+                    handleFilterChange("location", e.target.value)
+                  }
                   className="block w-full px-4 py-1.5 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                   placeholder="Ville ou région"
                 />
               </div>
               <div>
-                <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="category"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Catégorie
                 </label>
                 <select
                   id="category"
                   value={filters.category}
-                  onChange={(e) => handleFilterChange('category', e.target.value)}
+                  onChange={(e) =>
+                    handleFilterChange("category", e.target.value)
+                  }
                   className="block w-full px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 >
                   <option value="">Toutes les catégories</option>
@@ -138,13 +148,18 @@ export const Header = () => {
                 </select>
               </div>
               <div>
-                <label htmlFor="priceRange" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="priceRange"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Fourchette de prix
                 </label>
                 <select
                   id="priceRange"
                   value={filters.priceRange}
-                  onChange={(e) => handleFilterChange('priceRange', e.target.value)}
+                  onChange={(e) =>
+                    handleFilterChange("priceRange", e.target.value)
+                  }
                   className="block w-full px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 >
                   <option value="">Tous les prix</option>

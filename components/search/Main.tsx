@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import { MapPin } from 'lucide-react';
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { MapPin } from "lucide-react";
 import {
   useSearchAll,
   useSearchTouristicSites,
   useSearchArtisanShops,
-} from '@/services/search';
-import type { SearchDTO } from '@/types/search.types';
-import type { TouristicSite } from '@/types/touristic.types';
-import type { ArtisanShop } from '@/types/artisan.types';
-import ArtisanalShopCard from '@/app/components/landing-page/ArtisanalShopCard';
-import TouristSiteCard from '@/app/components/landing-page/TouristSiteCard';
-import ArtisanalShopSkeleton from '@/app/components/landing-page/skeletons/ArtisanalShopSkeleton';
-import TouristSiteSkeleton from '@/app/components/landing-page/skeletons/TouristSiteSkeleton';
+} from "@/services/search";
+import type { SearchDTO } from "@/types/search.types";
+import type { TouristicSite } from "@/types/touristic.types";
+import type { ArtisanShop } from "@/types/artisan.types";
+import ArtisanalShopCard from "@/components/landing-page/ArtisanalShopCard";
+import TouristSiteCard from "@/components/landing-page/TouristSiteCard";
+import ArtisanalShopSkeleton from "@/components/landing-page/skeletons/ArtisanalShopSkeleton";
+import TouristSiteSkeleton from "@/components/landing-page/skeletons/TouristSiteSkeleton";
 
-type SearchCategory = 'all' | 'sites' | 'artisans';
+type SearchCategory = "all" | "sites" | "artisans";
 
 export const Main = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const selectedTab = (searchParams.get('tab') || 'all') as SearchCategory;
-  const query = searchParams.get('q') || undefined;
-  const category = searchParams.get('category') || undefined;
-  const location = searchParams.get('location') || undefined;
+  const selectedTab = (searchParams.get("tab") || "all") as SearchCategory;
+  const query = searchParams.get("q") || undefined;
+  const category = searchParams.get("category") || undefined;
+  const location = searchParams.get("location") || undefined;
 
   const searchArgs: SearchDTO = {
     query,
@@ -37,22 +37,31 @@ export const Main = () => {
   const sitesOnlyResults = useSearchTouristicSites(searchArgs);
   const artisansOnlyResults = useSearchArtisanShops(searchArgs);
 
-  const isLoading = searchResults === undefined || sitesOnlyResults === undefined || artisansOnlyResults === undefined;
+  const isLoading =
+    searchResults === undefined ||
+    sitesOnlyResults === undefined ||
+    artisansOnlyResults === undefined;
 
   const handleTabChange = (tab: SearchCategory) => {
     const params = new URLSearchParams(searchParams);
-    params.set('tab', tab);
+    params.set("tab", tab);
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  const sites = selectedTab === 'all' ? searchResults?.touristicSites : sitesOnlyResults;
-  const artisans = selectedTab === 'all' ? searchResults?.artisanShops : artisansOnlyResults;
+  const sites =
+    selectedTab === "all" ? searchResults?.touristicSites : sitesOnlyResults;
+  const artisans =
+    selectedTab === "all" ? searchResults?.artisanShops : artisansOnlyResults;
 
   const getCount = (tab: SearchCategory) => {
     if (isLoading) return 0;
-    if (tab === 'all') return (searchResults?.touristicSites.length || 0) + (searchResults?.artisanShops.length || 0);
-    if (tab === 'sites') return sitesOnlyResults?.length || 0;
-    if (tab === 'artisans') return artisansOnlyResults?.length || 0;
+    if (tab === "all")
+      return (
+        (searchResults?.touristicSites.length || 0) +
+        (searchResults?.artisanShops.length || 0)
+      );
+    if (tab === "sites") return sitesOnlyResults?.length || 0;
+    if (tab === "artisans") return artisansOnlyResults?.length || 0;
     return 0;
   };
 
@@ -61,17 +70,17 @@ export const Main = () => {
       <div className="border-b border-gray-200 mb-8">
         <nav className="-mb-px flex space-x-8">
           {[
-            { value: 'all', label: 'Tout' },
-            { value: 'sites', label: 'Sites touristiques' },
-            { value: 'artisans', label: 'Artisans' },
+            { value: "all", label: "Tout" },
+            { value: "sites", label: "Sites touristiques" },
+            { value: "artisans", label: "Artisans" },
           ].map((tab) => (
             <button
               key={tab.value}
               onClick={() => handleTabChange(tab.value as SearchCategory)}
               className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
                 selectedTab === tab.value
-                  ? 'border-yellow-500 text-yellow-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? "border-yellow-500 text-yellow-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
               {tab.label}
@@ -86,32 +95,36 @@ export const Main = () => {
       <div className="space-y-8">
         {isLoading ? (
           <>
-            {(selectedTab === 'all' || selectedTab === 'sites') && (
+            {(selectedTab === "all" || selectedTab === "sites") && (
               <section>
                 <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
                   <MapPin className="w-5 h-5 mr-2 text-yellow-600" />
                   Sites touristiques
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {[...Array(3)].map((_, i) => <TouristSiteSkeleton key={i} />)}
+                  {[...Array(3)].map((_, i) => (
+                    <TouristSiteSkeleton key={i} />
+                  ))}
                 </div>
               </section>
             )}
-            {(selectedTab === 'all' || selectedTab === 'artisans') && (
+            {(selectedTab === "all" || selectedTab === "artisans") && (
               <section>
                 <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
                   <MapPin className="w-5 h-5 mr-2 text-yellow-600" />
                   Artisans locaux
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {[...Array(3)].map((_, i) => <ArtisanalShopSkeleton key={i} />)}
+                  {[...Array(3)].map((_, i) => (
+                    <ArtisanalShopSkeleton key={i} />
+                  ))}
                 </div>
               </section>
             )}
           </>
         ) : (
           <>
-            {(selectedTab === 'all' || selectedTab === 'sites') && (
+            {(selectedTab === "all" || selectedTab === "sites") && (
               <section>
                 <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
                   <MapPin className="w-5 h-5 mr-2 text-yellow-600" />
@@ -119,7 +132,14 @@ export const Main = () => {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {sites?.map((site: TouristicSite) => (
-                    <TouristSiteCard key={site._id} id={site._id} title={site.name} description={site.description} imageSrc={site.images[0]} imageAlt={site.name} />
+                    <TouristSiteCard
+                      key={site._id}
+                      id={site._id}
+                      title={site.name}
+                      description={site.description}
+                      imageSrc={site.images[0]}
+                      imageAlt={site.name}
+                    />
                   ))}
                 </div>
                 {sites?.length === 0 && (
@@ -130,7 +150,7 @@ export const Main = () => {
               </section>
             )}
 
-            {(selectedTab === 'all' || selectedTab === 'artisans') && (
+            {(selectedTab === "all" || selectedTab === "artisans") && (
               <section>
                 <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
                   <MapPin className="w-5 h-5 mr-2 text-yellow-600" />
@@ -138,7 +158,14 @@ export const Main = () => {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {artisans?.map((artisan: ArtisanShop) => (
-                    <ArtisanalShopCard key={artisan._id} id={artisan._id} name={artisan.name} location={artisan.location.city} categories={artisan.categories} imageSrc={artisan.images[0]} />
+                    <ArtisanalShopCard
+                      key={artisan._id}
+                      id={artisan._id}
+                      name={artisan.name}
+                      location={artisan.location.city}
+                      categories={artisan.categories}
+                      imageSrc={artisan.images[0]}
+                    />
                   ))}
                 </div>
                 {artisans?.length === 0 && (
