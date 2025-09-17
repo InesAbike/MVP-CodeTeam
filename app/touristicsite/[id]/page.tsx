@@ -1,9 +1,9 @@
 "use client";
 
-import TouristSiteCard from "../../components/touristicSite/TouristSiteCard";
-import ArtisanCard from "../../components/touristicSite/ArtisanCard";
-import { ArtisanGridSkeleton } from "../../components/touristicSite/skeletons/ArtisanGridSkeleton";
-import { TouristSiteCardSkeleton } from "../../components/touristicSite/skeletons/TouristSiteCardSkeleton";
+import TouristSiteCard from "../../../components/touristicSite/TouristSiteCard";
+import ArtisanCard from "../../../components/touristicSite/ArtisanCard";
+import { ArtisanGridSkeleton } from "../../../components/touristicSite/skeletons/ArtisanGridSkeleton";
+import { TouristSiteCardSkeleton } from "../../../components/touristicSite/skeletons/TouristSiteCardSkeleton";
 import { useGetTouristicSiteById } from "@/services/touristicSites";
 import { useGetNearbyArtisanShopsWithDetailsBySiteId } from "@/services/artisanShops";
 import { Id } from "@/convex/_generated/dataModel";
@@ -18,7 +18,7 @@ export default function DetailPage() {
   const site = useGetTouristicSiteById(id as Id<"touristicSites">);
   const nearbyArtisansWithDetails = useGetNearbyArtisanShopsWithDetailsBySiteId(
     id as Id<"touristicSites">,
-    6,
+    6
   );
 
   if (site === undefined) {
@@ -72,7 +72,9 @@ export default function DetailPage() {
                 key={item.artisan._id}
                 id={item.artisan._id}
                 name={item.artisan.name}
-                location={`${item.artisan.location.city}, ${item.artisan.location.department} (${item.distance.toFixed(1)} m)`}
+                location={`${item.artisan.location.city}, ${
+                  item.artisan.location.department
+                } (${item.distance.toFixed(1)} m)`}
                 categories={item.artisan.categories}
                 image={
                   item.artisan.images[0] ||

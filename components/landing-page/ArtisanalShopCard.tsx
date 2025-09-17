@@ -1,7 +1,6 @@
-import React from "react";
 import { MapPin, Share2, SquareArrowOutUpRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import { CustomImage } from "../ui/custom-image";
 
 interface ArtisanalShopCardProps {
   id: string;
@@ -19,19 +18,20 @@ const ArtisanalShopCard = ({
   imageSrc,
 }: ArtisanalShopCardProps) => {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-      <Image
-        src={imageSrc}
-        alt={`${name} - ${location}`}
-        width={500}
-        height={500}
-        className="w-full h-48 object-cover"
-      />
+    <div
+      title={name}
+      className="bg-white rounded-xl border relative border-gray-200 overflow-hidden"
+    >
+      <Link href={`/artisanat-shop/${id}`} className="absolute inset-0"></Link>
 
-      <div className="p-4">
-        <h3 className="text-lg font-bold text-gray-800 mb-2">{name}</h3>
+      <div className="relative w-full aspect-video">
+        <CustomImage src={imageSrc} alt={`${name} - ${location}`} fill />
+      </div>
 
-        <div className="flex items-center text-sm text-gray-600 mb-3">
+      <div className="p-4 space-y-2">
+        <h3 className="text-lg font-bold truncate text-gray-800">{name}</h3>
+
+        <div className="flex items-center text-sm text-gray-600">
           <MapPin className="w-4 h-4 mr-1" />
           <span>{location}</span>
         </div>
@@ -41,7 +41,7 @@ const ArtisanalShopCard = ({
             {categories.map((category, index) => (
               <span
                 key={index}
-                className="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-medium"
+                className="px-3 py-1 bg-benin-yellow/15 text-benin-red text-xs rounded-full font-medium"
               >
                 {category}
               </span>
@@ -52,7 +52,8 @@ const ArtisanalShopCard = ({
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <Share2 className="w-4 h-4 text-gray-600" />
             </button>
-            <Link href={`/artisanat-shop/${id}`}>
+
+            <Link href={`/artisanat-shop/${id}`} className="relative z-10">
               <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
                 <SquareArrowOutUpRight className="w-4 h-4 text-gray-600" />
               </button>

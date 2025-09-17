@@ -1,6 +1,6 @@
-import { Suspense } from 'react';
-import { Header } from '../components/search/Header';
-import { Main } from '../components/search/Main';
+import { Suspense } from "react";
+import { Header } from "../../components/search/Header";
+import { Main } from "../../components/search/Main";
 
 const SearchPage = () => {
   return (

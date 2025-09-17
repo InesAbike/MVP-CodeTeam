@@ -1,14 +1,14 @@
 "use client";
-import React from "react";
+
 import Image from "next/image";
 import { Heart, MessageCircle, Phone } from "lucide-react";
 import { IoLocationSharp } from "react-icons/io5";
-import ArtisanalShopCard from "../../components/landing-page/ArtisanalShopCard";
+import ArtisanalShopCard from "../../../components/landing-page/ArtisanalShopCard";
 import { shopFeaturedProducts } from "@/mocks/shopDetails";
 import { useGetArtisanShopById } from "@/services/artisanShops";
 import { Id } from "@/convex/_generated/dataModel";
 import { useGetTopArtisanShops } from "@/services/index";
-import ArtisanalShopSkeleton from "@/app/components/landing-page/skeletons/ArtisanalShopSkeleton";
+import ArtisanalShopSkeleton from "@/components/landing-page/skeletons/ArtisanalShopSkeleton";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -88,7 +88,7 @@ const DetailsShop = () => {
                           {(() => {
                             const today = new Date().getDay();
                             const todaySchedule = shop.openingHours?.find(
-                              (day) => day.day === today,
+                              (day) => day.day === today
                             );
                             if (!todaySchedule) {
                               return (
@@ -269,18 +269,16 @@ const DetailsShop = () => {
                       key={shop._id}
                       className="embla__slide flex-[0_0_375px]"
                     >
-                      <Link href={`/artisanat-shop/${shop._id}`}>
-                        <ArtisanalShopCard
-                          id={shop._id}
-                          name={shop.name}
-                          location={shop.location.address}
-                          categories={shop.categories}
-                          imageSrc={
-                            shop.images[0] ||
-                            "/images/artisanal-shop-img/weaver-shop.svg"
-                          }
-                        />
-                      </Link>
+                      <ArtisanalShopCard
+                        id={shop._id}
+                        name={shop.name}
+                        location={shop.location.address}
+                        categories={shop.categories}
+                        imageSrc={
+                          shop.images[0] ||
+                          "/images/artisanal-shop-img/weaver-shop.svg"
+                        }
+                      />
                     </div>
                   ))}
             </div>
