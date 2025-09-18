@@ -71,7 +71,7 @@ const Hero = () => {
             href="/search"
             className="text-white hover:text-benin-yellow transition-colors"
           >
-            Destinations
+            A propos
           </Link>
           <Link
             href="/interactive-map"
@@ -80,10 +80,10 @@ const Hero = () => {
             Carte Interactive
           </Link>
           <Link
-            href="/artisanat"
+            href="/search"
             className="text-white hover:text-benin-yellow transition-colors"
           >
-            Artisanat
+            Culture
           </Link>
         </div>
 
@@ -134,32 +134,32 @@ const Hero = () => {
               {/* Items du menu */}
               <div className="flex flex-col p-4">
                 <Link
-                  href="#"
+                  href="/"
                   className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
                   onClick={closeMenu}
                 >
                   Accueil
                 </Link>
                 <Link
-                  href="#"
+                  href="/"
                   className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
                   onClick={closeMenu}
                 >
-                  Destinations
+                  A propos
                 </Link>
                 <Link
-                  href="#"
+                  href="/interactive-map"
                   className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
                   onClick={closeMenu}
                 >
                   Carte Interactive
                 </Link>
                 <Link
-                  href="#"
+                  href="/search"
                   className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
                   onClick={closeMenu}
                 >
-                  Artisanat
+                  Culture
                 </Link>
 
                 {/* Bouton Contact Mobile dans le menu */}
