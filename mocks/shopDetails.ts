@@ -21,7 +21,7 @@ export const shopFeaturedProducts = [
         description: "Collection d'écharpes en motifs traditionnels, parfaites pour toutes les occasions créatives.",
         price: 8000,
         priceEuro: "+4€",
-        image: "/images/écharpes-colorées.png"
+        image: "/images/echarpes-colorées.png"
       },
       {
         id: 4,
