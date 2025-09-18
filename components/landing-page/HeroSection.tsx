@@ -61,30 +61,30 @@ const Hero = () => {
 
         {/* Menu Desktop */}
         <div className="hidden md:flex items-center space-x-8">
-          <a
+          <Link
             href="/"
             className="text-white hover:text-benin-yellow transition-colors"
           >
             Accueil
-          </a>
-          <a
+          </Link>
+          <Link
             href="/search"
             className="text-white hover:text-benin-yellow transition-colors"
           >
             Destinations
-          </a>
-          <a
+          </Link>
+          <Link
             href="/interactive-map"
             className="text-white hover:text-benin-yellow transition-colors"
           >
             Carte Interactive
-          </a>
-          <a
+          </Link>
+          <Link
             href="/artisanat"
             className="text-white hover:text-benin-yellow transition-colors"
           >
             Artisanat
-          </a>
+          </Link>
         </div>
 
         {/* Boutons Desktop + Menu Hamburger */}
@@ -133,34 +133,34 @@ const Hero = () => {
 
               {/* Items du menu */}
               <div className="flex flex-col p-4">
-                <a
+                <Link
                   href="#"
                   className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
                   onClick={closeMenu}
                 >
                   Accueil
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
                   className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
                   onClick={closeMenu}
                 >
                   Destinations
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
                   className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
                   onClick={closeMenu}
                 >
                   Carte Interactive
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
                   className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
                   onClick={closeMenu}
                 >
                   Artisanat
-                </a>
+                </Link>
 
                 {/* Bouton Contact Mobile dans le menu */}
                 <button
