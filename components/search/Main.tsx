@@ -37,6 +37,11 @@ export const Main = () => {
   const sitesOnlyResults = useSearchTouristicSites(searchArgs);
   const artisansOnlyResults = useSearchArtisanShops(searchArgs);
 
+  const navTab = [
+    { value: "all", label: "Tout" },
+    { value: "sites", label: "Sites touristiques" },
+    { value: "artisans", label: "Artisans" },
+  ]
   const isLoading =
     searchResults === undefined ||
     sitesOnlyResults === undefined ||
@@ -67,13 +72,9 @@ export const Main = () => {
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-      <div className="border-b border-gray-200 mb-8">
-        <nav className="-mb-px flex space-x-8">
-          {[
-            { value: "all", label: "Tout" },
-            { value: "sites", label: "Sites touristiques" },
-            { value: "artisans", label: "Artisans" },
-          ].map((tab) => (
+      <div className="border-b border-gray-200 mb-8 overflow-hidden">
+        <nav className="-mb-px flex space-x-8 overflow-x-auto scrollbar-hide">
+          {navTab.map((tab) => (
             <button
               key={tab.value}
               onClick={() => handleTabChange(tab.value as SearchCategory)}
