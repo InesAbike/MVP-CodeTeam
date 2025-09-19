@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 
 export default function HeroSection() {
@@ -14,10 +15,13 @@ export default function HeroSection() {
           </p>
 
           <div className="flex items-center justify-center">
-            <button className="border border-white text-white px-4 py-2 rounded-xl flex items-center space-x-2 transition-colors focus:outline-none focus:ring-2 focus:ring-benin-yellow/70 hover:bg-benin-green hover:border-benin-green">
+            <Link
+              href="/search"
+              className="border border-white text-white px-4 py-2 rounded-xl flex items-center space-x-2 transition-colors focus:outline-none focus:ring-2 focus:ring-benin-yellow/70 hover:bg-benin-green hover:border-benin-green"
+            >
               <span className="text-white">Découvrir</span>
               <BsArrowRightCircleFill size={16} />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
