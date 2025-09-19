@@ -8,6 +8,13 @@ import { HiMenu, HiX } from "react-icons/hi";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+const links: { href: string; label: string }[] = [
+  { href: "/", label: "Accueil" },
+  { href: "/search", label: "Destinations" },
+  { href: "/interactive-map", label: "Carte Interactive" },
+  { href: "/artisanat", label: "Artisanat" },
+];
+
 const Hero = () => {
   const router = useRouter();
   const [searchData, setSearchData] = useState({
@@ -46,11 +53,11 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative bg-[url(/images/hero-benin.webp)] bg-benin-green/65 bg-cover bg-bottom bg-no-repeat w-full overflow-hidden pb-20 h-screen flex flex-col justify-between">
+    <div className="relative bg-[url(/images/hero-benin.webp)] bg-benin-green/65 bg-cover bg-bottom bg-no-repeat w-full overflow-hidden pb-10 md:pb-20 md:h-screen flex flex-col justify-between">
       {/* Background Overlay */}
       <div className="absolute inset-0 bg-black/50 z-0" />
       {/* Navigation */}
-      <nav className="relative z-10 flex items-center justify-between px-6 lg:px-12 py-6">
+      <nav className="relative z-20 flex items-center justify-between px-6 lg:px-12 py-6">
         {/* Logo */}
         <Link
           href="/"
@@ -61,39 +68,27 @@ const Hero = () => {
 
         {/* Menu Desktop */}
         <div className="hidden md:flex items-center space-x-8">
-          <a
-            href="/"
-            className="text-white hover:text-benin-yellow transition-colors"
-          >
-            Accueil
-          </a>
-          <a
-            href="/search"
-            className="text-white hover:text-benin-yellow transition-colors"
-          >
-            Destinations
-          </a>
-          <a
-            href="/interactive-map"
-            className="text-white hover:text-benin-yellow transition-colors"
-          >
-            Carte Interactive
-          </a>
-          <a
-            href="/artisanat"
-            className="text-white hover:text-benin-yellow transition-colors"
-          >
-            Artisanat
-          </a>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-white hover:text-benin-yellow transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
 
         {/* Boutons Desktop + Menu Hamburger */}
         <div className="flex items-center space-x-4">
           {/* Bouton Contact Desktop */}
-          <button className="hidden md:flex border border-white backdrop-blur-sm text-white px-4 py-2 rounded-xl items-center space-x-2 hover:bg-opacity-30 transition-all">
+          <Link
+            href="/contact"
+            className="hidden md:flex border border-white backdrop-blur-sm text-white px-4 py-2 rounded-xl items-center space-x-2 hover:bg-opacity-30 transition-all"
+          >
             <span>Nous contacter</span>
             <BsArrowRightCircleFill size={16} />
-          </button>
+          </Link>
 
           {/* Bouton Hamburger */}
           <button
@@ -110,12 +105,12 @@ const Hero = () => {
           <>
             {/* Backdrop */}
             <div
-              className="fixed inset-0 bg-black/50 z-40"
+              className="fixed inset-0 md:hidden bg-black/50 z-40"
               onClick={closeMenu}
             ></div>
 
             {/* Menu Mobile */}
-            <div className="fixed top-0 right-0 h-full w-full sm:w-1/2 bg-benin-green backdrop-blur-lg z-50 transform transition-transform duration-300 ease-in-out">
+            <div className="fixed top-0 right-0 h-full w-full sm:w-1/2 md:hidden bg-benin-green backdrop-blur-lg z-50 transform transition-transform duration-300 ease-in-out">
               {/* Header du menu */}
               <div className="flex items-center justify-between p-6 border-b border-white/20">
                 <div className="flex items-center space-x-2">
@@ -133,34 +128,16 @@ const Hero = () => {
 
               {/* Items du menu */}
               <div className="flex flex-col p-4">
-                <a
-                  href="#"
-                  className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
-                  onClick={closeMenu}
-                >
-                  Accueil
-                </a>
-                <a
-                  href="#"
-                  className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
-                  onClick={closeMenu}
-                >
-                  Destinations
-                </a>
-                <a
-                  href="#"
-                  className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
-                  onClick={closeMenu}
-                >
-                  Carte Interactive
-                </a>
-                <a
-                  href="#"
-                  className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
-                  onClick={closeMenu}
-                >
-                  Artisanat
-                </a>
+                {links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-white hover:text-blue-200 transition-colors text-lg py-3 border-b border-white/10"
+                    onClick={closeMenu}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
 
                 {/* Bouton Contact Mobile dans le menu */}
                 <button

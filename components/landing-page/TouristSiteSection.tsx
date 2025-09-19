@@ -49,10 +49,9 @@ const TouristSiteSection = () => {
   const touristSites =
     sitesData?.map((site) => ({
       id: site._id,
-      title: site.name,
+      name: site.name,
       description: site.description,
-      imageSrc:
-        site.images[0] || "/images/tourist-site-img/porte-non-retour.jpg",
+      imageSrc: site.images[0],
       imageAlt: `${site.name} - ${site.location.city}`,
     })) || [];
 
@@ -85,16 +84,12 @@ const TouristSiteSection = () => {
                   Array.from({ length: 4 }).map((_, index) => (
                     <TouristSiteSkeleton key={`skeleton-${index}`} />
                   ))
-                : touristSites.map((site, index) => (
-                    <div key={index} className="embla__slide flex-[0_0_375px]">
-                      <TouristSiteCard
-                        id={site.id}
-                        title={site.title}
-                        description={site.description}
-                        imageSrc={site.imageSrc}
-                        imageAlt={site.imageAlt}
-                      />
-                    </div>
+                : touristSites.map((site) => (
+                    <TouristSiteCard
+                      site={site}
+                      key={site.id}
+                      className="embla__slide flex-[0_0_375px]"
+                    />
                   ))}
             </div>
           </div>

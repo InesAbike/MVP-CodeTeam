@@ -12,7 +12,7 @@ interface GeolocationOptions {
   maximumAge?: number;
 }
 
-export const useGeolocation = (options: GeolocationOptions = {}) => {
+export const useGeolocation = (options?: GeolocationOptions) => {
   const [state, setState] = useState<GeolocationState>({
     position: null,
     error: null,
@@ -52,34 +52,40 @@ export const useGeolocation = (options: GeolocationOptions = {}) => {
     });
   }, []);
 
-  const defaultOptions = useMemo(() => ({
-    enableHighAccuracy: true,
-    timeout: 10000,
-    maximumAge: 300000, // 5 minutes
-    ...options,
-  }), [options]);
+  const defaultOptions = useMemo(
+    () => ({
+      enableHighAccuracy: options?.enableHighAccuracy ?? true,
+      timeout: options?.timeout ?? 10000,
+      maximumAge: options?.maximumAge ?? 300000, // 5 minutes
+    }),
+    [options?.enableHighAccuracy, options?.timeout, options?.maximumAge]
+  );
 
-  const getCurrentPosition = useCallback((customOptions?: GeolocationOptions) => {
-    if (!navigator.geolocation) {
-      setState((prev) => ({
-        ...prev,
-        error: "La géolocalisation n'est pas supportée par ce navigateur",
-        isLoading: false,
-      }));
-      return;
-    }
+  const getCurrentPosition = useCallback(
+    (customOptions?: GeolocationOptions) => {
+      if (!navigator.geolocation) {
+        setState((prev) => ({
+          ...prev,
+          error: "La géolocalisation n'est pas supportée par ce navigateur",
+          isLoading: false,
+        }));
+        return;
+      }
 
-    setState((prev) => ({ ...prev, isLoading: true, error: null }));
+      setState((prev) => ({ ...prev, isLoading: true, error: null }));
 
-    const options = { ...defaultOptions, ...customOptions };
+      const options = { ...defaultOptions, ...customOptions };
 
-    navigator.geolocation.getCurrentPosition(position, error, options);
-  }, [defaultOptions, position, error]);
+      navigator.geolocation.getCurrentPosition(position, error, options);
+    },
+    [defaultOptions, position, error]
+  );
 
   // Auto-fetch on mount
   useEffect(() => {
     getCurrentPosition();
-  }, [getCurrentPosition]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     ...state,
