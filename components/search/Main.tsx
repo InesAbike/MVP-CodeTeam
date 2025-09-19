@@ -133,12 +133,13 @@ export const Main = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {sites?.map((site: TouristicSite) => (
                     <TouristSiteCard
+                      site={{
+                        description: site.description,
+                        id: site._id,
+                        imageSrc: site.images[0],
+                        name: site.name,
+                      }}
                       key={site._id}
-                      id={site._id}
-                      title={site.name}
-                      description={site.description}
-                      imageSrc={site.images[0]}
-                      imageAlt={site.name}
                     />
                   ))}
                 </div>
