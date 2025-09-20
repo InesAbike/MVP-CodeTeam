@@ -121,7 +121,7 @@ const TestimonialCard = ({
 
 export function TestimonialsSection() {
   return (
-    <div className="py-16 max-w-7xl mx-auto">
+    <div className="py-16 max-w-7xl mx-auto px-6">
       <div className="mb-12">
         <h2 className="text-2xl md:text-3xl xl:text-4xl font-bold text-gray-900 mb-4">
           Témoignages de nos voyageurs
