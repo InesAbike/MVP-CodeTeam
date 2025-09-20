@@ -10,9 +10,9 @@ import Link from "next/link";
 
 const links: { href: string; label: string }[] = [
   { href: "/", label: "Accueil" },
-  { href: "/search", label: "A propos" },
+  { href: "/", label: "A propos" },
   { href: "/interactive-map", label: "Carte Interactive" },
-  { href: "/artisanat", label: "Culture" },
+  { href: "/search", label: "Culture" },
 ];
 
 const Hero = () => {
